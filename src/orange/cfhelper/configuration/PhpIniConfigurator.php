@@ -25,14 +25,21 @@ class PhpIniConfigurator
 
     public function loadIniConfig()
     {
+        $arrayValues = array();
         try {
-            $servicePhpIni = null;
+
             $servicePhpIni = $this->serviceManager->getService(PhpIniConfigurator::$servicePhpIniName . '-' . $this->applicationInfo->getName());
+            $arrayValues = $servicePhpIni->getValues();
         } catch (\Exception $e) {
-            return;
+
         }
-        foreach ($servicePhpIni->getValues() as $key => $value) {
+        if (is_file(__DIR__ . '/../../../../../../../composer.json')) {
+            $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../composer.json'), true);
+            $arrayValues = array_merge($arrayValues, $composerJson['php-ini']);
+        }
+        foreach ($arrayValues as $key => $value) {
             ini_set($key, $value);
+            var_dump($key . '=' . $value);
         }
 
     }

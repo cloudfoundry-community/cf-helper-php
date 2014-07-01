@@ -18,7 +18,7 @@ class CfHelper
     private function __construct()
     {
         $this->beanLoader = \Arhframe\IocArt\BeanLoader::getInstance();
-        if (!is_file(__DIR__ . '/../../../../../context/main.yml')) {
+        if (!is_file(__DIR__ . '/../../../../../../context/main.yml')) {
             $yaml = Yaml::parse(__DIR__ . '/../../../context/main.yml');
             unset($yaml['@import']);
             $yaml = Yaml::dump($yaml);
@@ -26,7 +26,7 @@ class CfHelper
             $this->beanLoader->loadContext(__DIR__ . '/../../../context/main.yml');
         } else {
             $yaml = Yaml::parse(__DIR__ . '/context/main.yml');
-            $yaml['@import'] = array('../../../context/main.yml');
+            $yaml['@import'] = array('../../../../context/main.yml');
             $yaml = Yaml::dump($yaml);
             file_put_contents(__DIR__ . '/../../../context/main.yml', $yaml);
             $this->beanLoader->loadContext(__DIR__ . '/../../../context/main.yml');
