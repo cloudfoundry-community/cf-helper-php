@@ -1,12 +1,12 @@
 {
-    "name": "orange-opensource/elpaaso",
-    "description": "elpaaso for php",
+    "name": "orange-opensource/cf-helper-php",
+    "description": "Cloudfoundry helper in php",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
         {
-            "name": "Orange",
-            "email": "email@example.com"
+            "name": "Arthur Haler",
+            "email": "arthur.halet@orange.com"
         }
     ],
     "require": {
