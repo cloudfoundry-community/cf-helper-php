@@ -45,11 +45,11 @@ class CfHelper
 
     public function getServiceManager()
     {
-        return $this->beanLoader->getBean('elpaaso.serviceManager');
+        return $this->beanLoader->getBean('cfhelper.serviceManager');
     }
 
     public function getApplicationInfo()
     {
-        return $this->beanLoader->getBean('elpaaso.applicationInfo');
+        return $this->beanLoader->getBean('cfhelper.applicationInfo');
     }
 }
