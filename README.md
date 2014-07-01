@@ -1,23 +1,29 @@
 cf-helper-php
 =============
 
-An helper for php application inside cloudfoundry to get services binded and application information.
-This helper work was tested on [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) and [dmikusa-pivotal/cf-php-build-pack](https://github.com/dmikusa-pivotal/cf-php-build-pack) php buildpack.
+An helper for php application inside cloudfoundry to access application and services bindings information without parsing the json-formatted `VCAP_APPLICATION` or `VCAP_SERVICES` env vars. This is similar to the https://www.npmjs.org/package/cfenv node package.
+You will never have to do this again:
+```php
+<?php
+$vcap_services = json_decode($_ENV['VCAP_SERVICES']);
+```
+
+This helper was tested against [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) and [dmikusa-pivotal/cf-php-build-pack](https://github.com/dmikusa-pivotal/cf-php-build-pack) php buildpack.
 
 Usage
 -----
-This php application is a composer package so use composer and put in your required package inside your composer.json:
+This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
 "orange-opensource/cf-helper-php": "1.1.*"
 ```
-And include in page you want to load this helper like this:
+And include it the page you want to load:
 ```php
 <?php
 require_once __DIR__ .'/vendor/autoload.php';
 use orange\cfhelper\CfHelper;
 $cfHelper = CfHelper::getInstance();
 ```
-You can access to service manager or application information.
+You can access the service binding or application information through the service manager class
 
 
 ### Get your service(s)
@@ -48,7 +54,6 @@ Simply like this:
 $applicationInfo = $cfHelper->getApplicationInfo();
 $version = $applicationInfo->getVersion();
 $name = $applicationInfo->getName();
-$host = $applicationInfo->getHost();
 $uris = $applicationInfo->getUris();
 
 //for other information contains in VCAP_APPLICATION like limits get with that
@@ -70,7 +75,7 @@ So with `cf-helper-php` we help you to set your php configuration, add in your c
 Set your php project in development mode
 ----------------------------------------
 By default this two buildpacks hide error and it's not very good when you're in development phase. 
-With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that add in your composer.json a `cfhelper` variable and put `type`variable in `developement`:
+With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that add in your composer.json a `cfhelper` variable and put `type` variable in `developement`:
 ```json
 "cfhelper":{
     "type": "development"
