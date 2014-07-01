@@ -39,7 +39,6 @@ class PhpIniConfigurator
         }
         foreach ($arrayValues as $key => $value) {
             ini_set($key, $value);
-            var_dump($key . '=' . $value);
         }
 
     }
