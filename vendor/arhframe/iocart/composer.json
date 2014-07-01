@@ -1,0 +1,27 @@
+{
+    "name": "arhframe/iocart",
+    "description": "Ioc which use the spring style.",
+    "keywords": ["Framework", "IOC", "Arhframe", "spring"],
+    "homepage": "https://github.com/arhframe/annotations",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur Halet",
+            "email": "arthurh.halet@gmail.com",
+            "homepage": "http://arthurh.fr"
+        }
+    ],
+    "require": {
+        "arhframe/yamlarh": "1.1.*",
+        "arhframe/annotations": "0.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Arhframe\\IocArt": "src/"
+        }
+    },
+    "support": {
+          "email": "arthurh.halet@gmail.com"
+    }
+}

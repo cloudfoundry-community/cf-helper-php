@@ -1,0 +1,19 @@
+elpaaso.applicationInfo:
+  class: elpaaso\application\ApplicationInfo
+elpaaso.populator:
+  class: elpaaso\services\PopulatorCloudFoundry
+  property:
+    applicationInfo:
+      ref: elpaaso.applicationInfo
+elpaaso.serviceManager:
+  class: elpaaso\services\ServiceManager
+  property:
+    populator:
+      ref: elpaaso.populator
+elpaaso.phpIniConfigurator:
+  class: elpaaso\configuration\PhpIniConfigurator
+  property:
+    serviceManager:
+      ref: elpaaso.serviceManager
+    applicationInfo:
+      ref: elpaaso.applicationInfo

@@ -1,0 +1,249 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "3414c5982de41def1aa08efa59f4ee15",
+    "packages": [
+        {
+            "name": "arhframe/annotations",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arhframe/annotations.git",
+                "reference": "d14ae87ef089198804773ede5e6b7564db78350a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arhframe/annotations/zipball/d14ae87ef089198804773ede5e6b7564db78350a",
+                "reference": "d14ae87ef089198804773ede5e6b7564db78350a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Arhframe\\Annotations": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Halet",
+                    "email": "arthurh.halet@gmail.com",
+                    "homepage": "http://arthurh.fr"
+                }
+            ],
+            "description": "Annotations for arhframe framework.",
+            "homepage": "https://github.com/arhframe/annotations",
+            "keywords": [
+                "Arhframe",
+                "annotation",
+                "framework"
+            ],
+            "time": "2014-06-25 09:44:48"
+        },
+        {
+            "name": "arhframe/iocart",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arhframe/iocart.git",
+                "reference": "09663ed7336b424e592859e34a0b110e349a687e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arhframe/iocart/zipball/09663ed7336b424e592859e34a0b110e349a687e",
+                "reference": "09663ed7336b424e592859e34a0b110e349a687e",
+                "shasum": ""
+            },
+            "require": {
+                "arhframe/annotations": "0.2",
+                "arhframe/yamlarh": "1.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Arhframe\\IocArt": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Halet",
+                    "email": "arthurh.halet@gmail.com",
+                    "homepage": "http://arthurh.fr"
+                }
+            ],
+            "description": "Ioc which use the spring style.",
+            "homepage": "https://github.com/arhframe/annotations",
+            "keywords": [
+                "Arhframe",
+                "framework",
+                "ioc",
+                "spring"
+            ],
+            "time": "2014-06-25 09:46:44"
+        },
+        {
+            "name": "arhframe/util",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arhframe/util.git",
+                "reference": "2f574e5ab9b830809f4022afce01db11b7148b8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arhframe/util/zipball/2f574e5ab9b830809f4022afce01db11b7148b8e",
+                "reference": "2f574e5ab9b830809f4022afce01db11b7148b8e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Arhframe\\Util": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Halet",
+                    "email": "arthurh.halet@gmail.com",
+                    "homepage": "http://arthurh.fr"
+                }
+            ],
+            "description": "Util class for arhframe",
+            "homepage": "https://github.com/arhframe/util",
+            "keywords": [
+                "Arhframe",
+                "framework",
+                "util"
+            ],
+            "time": "2014-01-27 17:30:10"
+        },
+        {
+            "name": "arhframe/yamlarh",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arhframe/yamlarh.git",
+                "reference": "e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arhframe/yamlarh/zipball/e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a",
+                "reference": "e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a",
+                "shasum": ""
+            },
+            "require": {
+                "arhframe/util": "1.1.2",
+                "symfony/yaml": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Arhframe\\Yamlarh": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arthur Halet",
+                    "email": "arthurh.halet@gmail.com",
+                    "homepage": "http://arthurh.fr"
+                }
+            ],
+            "description": "Inject data and import other yaml file into your yaml file.",
+            "homepage": "https://github.com/arhframe/yamlarh",
+            "keywords": [
+                "Arhframe",
+                "framework",
+                "inject",
+                "injector",
+                "yaml"
+            ],
+            "time": "2014-04-10 23:13:42"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.5.0",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "b4b09c68ec2f2727574544ef0173684281a5033c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/b4b09c68ec2f2727574544ef0173684281a5033c",
+                "reference": "b4b09c68ec2f2727574544ef0173684281a5033c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-05-16 14:25:18"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ],
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

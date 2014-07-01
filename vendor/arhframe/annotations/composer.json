@@ -1,0 +1,23 @@
+{
+    "name": "arhframe/annotations",
+    "description": "Annotations for arhframe framework.",
+    "keywords": ["Framework", "Annotation", "Arhframe"],
+    "homepage": "https://github.com/arhframe/annotations",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arthur Halet",
+            "email": "arthurh.halet@gmail.com",
+            "homepage": "http://arthurh.fr"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Arhframe\\Annotations": "src/"
+        }
+    },
+    "support": {
+          "email": "arthurh.halet@gmail.com"
+    }
+}

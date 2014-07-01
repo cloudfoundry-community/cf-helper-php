@@ -1,0 +1,22 @@
+{
+    "name": "orange/elpaaso",
+    "description": "elpaaso for php",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Orange",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+        "arhframe/iocart": "1.0.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "elpaaso\\services": "src/",
+            "elpaaso\\application": "src/",
+            "elpaaso\\configuration": "src/"
+        }
+    }
+}
