@@ -31,7 +31,7 @@ class CfHelper
             file_put_contents(__DIR__ . '/../../../context/main.yml', $yaml);
             $this->beanLoader->loadContext(__DIR__ . '/../../../context/main.yml');
         }
-        $phpIniConfigurator = $this->beanLoader->getBean('elpaaso.phpIniConfigurator');
+        $phpIniConfigurator = $this->beanLoader->getBean('cfhelper.phpIniConfigurator');
         $phpIniConfigurator->loadIniConfig();
     }
 
