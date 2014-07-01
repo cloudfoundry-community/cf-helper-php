@@ -1,17 +1,17 @@
 elpaaso.applicationInfo:
-  class: elpaaso\application\ApplicationInfo
+  class: orange\cfhelper\application\ApplicationInfo
 elpaaso.populator:
-  class: elpaaso\services\PopulatorCloudFoundry
+  class: orange\cfhelper\services\PopulatorCloudFoundry
   property:
     applicationInfo:
       ref: elpaaso.applicationInfo
 elpaaso.serviceManager:
-  class: elpaaso\services\ServiceManager
+  class: orange\cfhelper\services\ServiceManager
   property:
     populator:
       ref: elpaaso.populator
 elpaaso.phpIniConfigurator:
-  class: elpaaso\configuration\PhpIniConfigurator
+  class: orange\cfhelper\configuration\PhpIniConfigurator
   property:
     serviceManager:
       ref: elpaaso.serviceManager
