@@ -1,7 +1,7 @@
 <?php
-namespace elpaaso\services;
+namespace orange\services;
 
-use elpaaso\application\ApplicationInfo;
+use orange\cfhelper\application\ApplicationInfo;
 
 class PopulatorCloudFoundry extends Populator
 {

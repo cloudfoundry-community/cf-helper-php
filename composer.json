@@ -1,8 +1,8 @@
 {
-    "name": "orange/elpaaso",
+    "name": "orange-opensource/elpaaso",
     "description": "elpaaso for php",
     "minimum-stability": "stable",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Orange",
@@ -14,9 +14,10 @@
     },
     "autoload": {
         "psr-0": {
-            "elpaaso\\services": "src/",
-            "elpaaso\\application": "src/",
-            "elpaaso\\configuration": "src/"
+            "orange\\cfhelper\\services": "src/",
+            "orange\\cfhelper\\application": "src/",
+            "orange\\cfhelper\\configuration": "src/",
+            "orange\\cfhelper": "src"
         }
     }
 }

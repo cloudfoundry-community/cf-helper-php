@@ -6,7 +6,7 @@
  * Time: 16:04
  */
 
-namespace elpaaso\services;
+namespace orange\cfhelper\services;
 
 
 class ServiceManager

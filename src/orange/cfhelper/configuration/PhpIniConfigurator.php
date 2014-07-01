@@ -6,11 +6,11 @@
  * Time: 12:09
  */
 
-namespace elpaaso\configuration;
+namespace orange\cfhelper\configuration;
 
 
-use elpaaso\application\ApplicationInfo;
-use elpaaso\services\ServiceManager;
+use orange\cfhelper\application\ApplicationInfo;
+use orange\cfhelper\services\ServiceManager;
 
 class PhpIniConfigurator
 {

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3414c5982de41def1aa08efa59f4ee15",
+    "hash": "9ac9d0b23fc55dafb570c27edd396d3f",
     "packages": [
         {
             "name": "arhframe/annotations",
@@ -93,16 +93,16 @@
         },
         {
             "name": "arhframe/util",
-            "version": "1.1.2",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arhframe/util.git",
-                "reference": "2f574e5ab9b830809f4022afce01db11b7148b8e"
+                "reference": "9aaceee2001fcf6c32ea807f39b13ceb599ecd13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arhframe/util/zipball/2f574e5ab9b830809f4022afce01db11b7148b8e",
-                "reference": "2f574e5ab9b830809f4022afce01db11b7148b8e",
+                "url": "https://api.github.com/repos/arhframe/util/zipball/9aaceee2001fcf6c32ea807f39b13ceb599ecd13",
+                "reference": "9aaceee2001fcf6c32ea807f39b13ceb599ecd13",
                 "shasum": ""
             },
             "require": {
@@ -132,24 +132,24 @@
                 "framework",
                 "util"
             ],
-            "time": "2014-01-27 17:30:10"
+            "time": "2014-03-09 01:04:05"
         },
         {
             "name": "arhframe/yamlarh",
-            "version": "1.1.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arhframe/yamlarh.git",
-                "reference": "e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a"
+                "reference": "dac2f34aee12fe05e5f09644922ad5cc9e7d63d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arhframe/yamlarh/zipball/e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a",
-                "reference": "e3c9876a9ba79b3f9e9562ea8816f94cfa12ba0a",
+                "url": "https://api.github.com/repos/arhframe/yamlarh/zipball/dac2f34aee12fe05e5f09644922ad5cc9e7d63d6",
+                "reference": "dac2f34aee12fe05e5f09644922ad5cc9e7d63d6",
                 "shasum": ""
             },
             "require": {
-                "arhframe/util": "1.1.2",
+                "arhframe/util": "1.1.4",
                 "symfony/yaml": "2.*"
             },
             "type": "library",
@@ -178,7 +178,7 @@
                 "injector",
                 "yaml"
             ],
-            "time": "2014-04-10 23:13:42"
+            "time": "2014-06-29 14:54:47"
         },
         {
             "name": "symfony/yaml",

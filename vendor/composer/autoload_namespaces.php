@@ -6,9 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'elpaaso\\services' => array($baseDir . '/src'),
-    'elpaaso\\configuration' => array($baseDir . '/src'),
-    'elpaaso\\application' => array($baseDir . '/src'),
+    'orange\\cfhelper\\services' => array($baseDir . '/src'),
+    'orange\\cfhelper\\configuration' => array($baseDir . '/src'),
+    'orange\\cfhelper\\application' => array($baseDir . '/src'),
+    'orange\\cfhelper' => array($baseDir . '/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Arhframe\\Yamlarh' => array($vendorDir . '/arhframe/yamlarh/src'),
     'Arhframe\\Util' => array($vendorDir . '/arhframe/util/src'),

@@ -6,9 +6,9 @@
  * Time: 18:50
  */
 
-namespace elpaaso\application;
+namespace orange\cfhelper\application;
 
-use elpaaso\services\PopulatorCloudFoundry;
+use orange\cfhelper\services\PopulatorCloudFoundry;
 
 class ApplicationInfo
 {

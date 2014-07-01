@@ -2,6 +2,7 @@
 namespace Arhframe\Util;
 /**
 *
+* 
 */
 final class UtilException extends \Exception
 {

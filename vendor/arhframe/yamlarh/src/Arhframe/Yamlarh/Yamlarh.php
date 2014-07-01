@@ -172,7 +172,7 @@ class Yamlarh
         }
         $includeYaml = null;
         foreach ($arrayYaml as $key => $value) {
-            if (is_array($value) && $key !== '@include') {
+            if (is_array($value) && $key !== '@include' && count($value) > 0) {
                 $includeYaml[$key] = $this->searchForInclude($value);
                 continue;
             }
