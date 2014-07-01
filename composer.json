@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "arhframe/iocart": "1.0.1"
+        "arhframe/iocart": "1.0.1",
+        "filp/whoops": "1.1.1"
     },
     "autoload": {
         "psr-0": {
