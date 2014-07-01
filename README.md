@@ -63,7 +63,7 @@ So with `cf-helper-php` we help you to set your php configuration, add in your c
 ```json
 "php-ini": {
     "display_errors": "On",
-    "error_reporting": -1, //equal to E_ALL & ~E_NOTICE
+    "error_reporting": -1, //equal to E_ALL & ~E_DEPRECATED
 }
 ```
 
