@@ -70,7 +70,7 @@ So with `cf-helper-php` we help you to set your php configuration, add in your c
 Set your php project in development mode
 ----------------------------------------
 By default this two buildpacks hide error and it's not very good when you're in development phase. 
-With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that dd in your composer.json a `cfhelper` variable and put `type`variable in `developement`:
+With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that add in your composer.json a `cfhelper` variable and put `type`variable in `developement`:
 ```json
 "cfhelper":{
     "type": "development"
