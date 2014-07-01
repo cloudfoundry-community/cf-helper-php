@@ -1,5 +1,5 @@
 <?php
-namespace orange\services;
+namespace orange\cfhelper\services;
 
 use orange\cfhelper\application\ApplicationInfo;
 
