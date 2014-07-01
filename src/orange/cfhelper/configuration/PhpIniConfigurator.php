@@ -41,7 +41,7 @@ class PhpIniConfigurator
     {
         if (!empty($this->config['type']) && $this->config['type'] == 'development') {
             ini_set("display_errors", "On");
-            ini_set("error_reporting", -1);
+            ini_set("error_reporting", E_ALL & ~E_NOTICE);
             $whoops = new \Whoops\Run;
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
