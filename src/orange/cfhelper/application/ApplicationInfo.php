@@ -14,7 +14,7 @@ class ApplicationInfo
 {
     public $version;
     public $name;
-    public $uri;
+    public $uris;
     public $host;
     public $port;
 
@@ -75,17 +75,17 @@ class ApplicationInfo
     /**
      * @return mixed
      */
-    public function getUri()
+    public function getUris()
     {
-        return $this->uri;
+        return $this->uris;
     }
 
     /**
      * @param mixed $uri
      */
-    public function setUri($uri)
+    public function setUris($uris)
     {
-        $this->uri = $uri;
+        $this->uris = $uris;
     }
 
     /**
