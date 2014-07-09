@@ -3,6 +3,7 @@
     "description": "Cloudfoundry helper in php",
     "minimum-stability": "stable",
     "license": "MIT",
+    "keywords": ["cloudfoundry", "helper", "services", "vcapservices"],
     "authors": [
         {
             "name": "Arthur Haler",
