@@ -66,6 +66,9 @@ class PhpIniConfigurator
         }
         if (is_file(__DIR__ . '/../../../../../../../composer.json')) {
             $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../composer.json'), true);
+            if (empty($composerJson['php-ini'])) {
+                return;
+            }
             $arrayValues = array_merge($arrayValues, $composerJson['php-ini']);
         }
         foreach ($arrayValues as $key => $value) {
