@@ -11,6 +11,7 @@
 
 namespace orange\cfhelper;
 
+use orange\cfhelper\simulator\CloudFoundrySimulator;
 use Symfony\Component\Yaml\Yaml;
 
 class CfHelper
@@ -54,5 +55,10 @@ class CfHelper
     public function getApplicationInfo()
     {
         return $this->beanLoader->getBean('cfhelper.applicationInfo');
+    }
+
+    public function simulateCloudFoundry($manifestYml = "manifest.yml")
+    {
+        CloudFoundrySimulator::simulate($manifestYml);
     }
 }
