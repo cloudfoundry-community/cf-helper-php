@@ -37,19 +37,18 @@ class PopulatorCloudFoundry extends Populator
     function __construct()
     {
         parent::__construct();
-        $this->vcapServices = json_decode($_ENV['VCAP_SERVICES'], true);
-        if (empty($this->vcapServices)) {
-            $this->vcapServices = array();
-        }
     }
 
     /**
      * @param $name
      * @return null|Service
-     * @throws \Exception
      */
     public function getService($name)
     {
+        $this->vcapServices = json_decode($_ENV['VCAP_SERVICES'], true);
+        if (empty($this->vcapServices)) {
+            $this->vcapServices = array();
+        }
         if (!empty($this->services[$name])) {
             return $this->services[$name];
         }
@@ -61,7 +60,7 @@ class PopulatorCloudFoundry extends Populator
         if (!empty($service)) {
             return $service;
         }
-        throw new \Exception("Service $name cannot be found.");
+        return null;
     }
 
     /**
@@ -101,6 +100,9 @@ class PopulatorCloudFoundry extends Populator
     {
         foreach ($this->vcapServices as $serviceFirstName => $services) {
             foreach ($services as $service) {
+                if (empty($service['name'])) {
+                    continue;
+                }
                 if (preg_match('#^' . $name . '$#i', $service['name'])) {
                     return $this->makeService($service);
                 }

@@ -95,7 +95,7 @@ class CloudFoundrySimulator
                 "tags" => array(),
                 "credentials" => $serviceCredentials
             );
-            $serviceUserProvided = array("user-provided" => $service);
+            $serviceUserProvided = array(array("user-provided" => $service));
             CloudFoundrySimulator::loadVarEnv(array(self::KEY_SERVICE => json_encode($serviceUserProvided)));
         }
     }

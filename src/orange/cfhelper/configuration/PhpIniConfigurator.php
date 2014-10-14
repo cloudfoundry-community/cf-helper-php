@@ -85,12 +85,9 @@ class PhpIniConfigurator
     public function loadIniConfig()
     {
         $arrayValues = array();
-        try {
-
-            $servicePhpIni = $this->serviceManager->getService(PhpIniConfigurator::$servicePhpIniName . '-' . $this->applicationInfo->getName());
+        $servicePhpIni = $this->serviceManager->getService(PhpIniConfigurator::$servicePhpIniName . '-' . $this->applicationInfo->getName());
+        if ($servicePhpIni != null) {
             $arrayValues = $servicePhpIni->getValues();
-        } catch (\Exception $e) {
-
         }
         if (is_file(__DIR__ . '/../../../../../../../composer.json')) {
             $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../composer.json'), true);

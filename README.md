@@ -84,8 +84,30 @@ With `cf-helper-php` you can say that you are in development and app will do the
 
 Simulate CloudFoundry environment
 ---------------------------------
+You can half simulate a CloudFoudry environment by using a `manifest.yml`, your environment variable from manifest will be set in `$_ENV`.
+You can also add simulate service by adding a key called `serviceSimulate` in your `manifest.yml`, example:
 
+```yml
+#manifest.yml
+---
+#manifest
+applications:
+  - name: test
+    memory: 1G
+    env:
+      MYAPP_APP_DIR: /home/vcap/app
+      MYAPP_LOGS_DIR: /logs_dir
+serviceSimulate:
+  DATABASE: {"host": "localhost", "username": "jojo", "password": "toto", "port": "3306"} # a service database will be accessible, prefer writing with {'key": 'value'} to simplify your cups command
+```
 
+To run CloudFoundry simulation simply do:
+```php
+<?php
+$cfHelper->simulateCloudFoundry(); //it use manifest.yml which is in the same folder where this script is called
+//to set another manifest.yml:
+$cfHelper->simulateCloudFoundry("your_manifest.yml);
+```
 
 
 
