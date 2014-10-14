@@ -13,14 +13,36 @@ namespace orange\cfhelper\application;
 
 use orange\cfhelper\services\PopulatorCloudFoundry;
 
+/**
+ * Class ApplicationInfo
+ * @package orange\cfhelper\application
+ */
 class ApplicationInfo
 {
+    /**
+     * @var string
+     */
     public $version;
+    /**
+     * @var string
+     */
     public $name;
+    /**
+     * @var string[]
+     */
     public $uris;
+    /**
+     * @var string
+     */
     public $host;
+    /**
+     * @var int
+     */
     public $port;
 
+    /**
+     *
+     */
     public function __construct()
     {
 
@@ -28,7 +50,7 @@ class ApplicationInfo
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getHost()
     {
@@ -36,7 +58,7 @@ class ApplicationInfo
     }
 
     /**
-     * @param mixed $host
+     * @param string $host
      */
     public function setHost($host)
     {
@@ -44,7 +66,7 @@ class ApplicationInfo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -52,7 +74,7 @@ class ApplicationInfo
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -60,7 +82,7 @@ class ApplicationInfo
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getPort()
     {
@@ -68,7 +90,7 @@ class ApplicationInfo
     }
 
     /**
-     * @param mixed $port
+     * @param int $port
      */
     public function setPort($port)
     {
@@ -76,7 +98,7 @@ class ApplicationInfo
     }
 
     /**
-     * @return mixed
+     * @return string[]
      */
     public function getUris()
     {
@@ -84,7 +106,7 @@ class ApplicationInfo
     }
 
     /**
-     * @param mixed $uri
+     * @param string[] $uris
      */
     public function setUris($uris)
     {
@@ -92,7 +114,7 @@ class ApplicationInfo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getVersion()
     {
@@ -100,7 +122,7 @@ class ApplicationInfo
     }
 
     /**
-     * @param mixed $version
+     * @param string $version
      */
     public function setVersion($version)
     {

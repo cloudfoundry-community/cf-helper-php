@@ -12,17 +12,27 @@
 namespace orange\cfhelper\services;
 
 
+/**
+ * Class ServiceManager
+ * @package orange\cfhelper\services
+ */
 class ServiceManager
 {
+    /**
+     * @var Populator
+     */
     private $populator;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->populator = new PopulatorCloudFoundry();
     }
 
     /**
-     * @return mixed
+     * @return Populator
      */
     public function getPopulator()
     {
@@ -31,7 +41,7 @@ class ServiceManager
 
     /**
      * @Required
-     * @param mixed $populator
+     * @param Populator $populator
      */
     public function setPopulator(Populator $populator)
     {
@@ -39,6 +49,10 @@ class ServiceManager
     }
 
 
+    /**
+     * @param $name
+     * @return null|Service
+     */
     public function getService($name)
     {
         return $this->populator->getService($name);

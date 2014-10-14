@@ -15,18 +15,40 @@ namespace orange\cfhelper\configuration;
 use orange\cfhelper\application\ApplicationInfo;
 use orange\cfhelper\services\ServiceManager;
 
+/**
+ * Class PhpIniConfigurator
+ * @package orange\cfhelper\configuration
+ */
 class PhpIniConfigurator
 {
+    /**
+     * @var string
+     */
     public static $servicePhpIniName = 'php-ini';
+    /**
+     * @var ServiceManager
+     */
     private $serviceManager;
+    /**
+     * @var ApplicationInfo
+     */
     private $applicationInfo;
+    /**
+     * @var array
+     */
     private $config = array();
 
+    /**
+     *
+     */
     function __construct()
     {
         $this->loadConfigCfHelper();
     }
 
+    /**
+     *
+     */
     public function loadConfigCfHelper()
     {
         if (!is_file(__DIR__ . '/../../../../../../../composer.json')) {
@@ -40,6 +62,9 @@ class PhpIniConfigurator
         $this->loadConfig();
     }
 
+    /**
+     *
+     */
     public function loadConfig()
     {
         if (!empty($this->config['type']) && $this->config['type'] == 'development') {
@@ -54,6 +79,9 @@ class PhpIniConfigurator
         }
     }
 
+    /**
+     *
+     */
     public function loadIniConfig()
     {
         $arrayValues = array();
@@ -78,7 +106,7 @@ class PhpIniConfigurator
     }
 
     /**
-     * @return mixed
+     * @return ServiceManager
      */
     public function getServiceManager()
     {
@@ -87,7 +115,7 @@ class PhpIniConfigurator
 
     /**
      * @Required
-     * @param mixed $serviceManager
+     * @param ServiceManager $serviceManager
      */
     public function setServiceManager(ServiceManager $serviceManager)
     {
@@ -95,7 +123,7 @@ class PhpIniConfigurator
     }
 
     /**
-     * @return mixed
+     * @return ApplicationInfo
      */
     public function getApplicationInfo()
     {
@@ -104,7 +132,7 @@ class PhpIniConfigurator
 
     /**
      * @Required
-     * @param mixed $applicationInfo
+     * @param ApplicationInfo $applicationInfo
      */
     public function setApplicationInfo(ApplicationInfo $applicationInfo)
     {

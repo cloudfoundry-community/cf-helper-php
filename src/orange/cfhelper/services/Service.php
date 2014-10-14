@@ -10,12 +10,31 @@
  */
 namespace orange\cfhelper\services;
 
+/**
+ * Class Service
+ * @package orange\cfhelper\services
+ */
 class Service
 {
+
+    /**
+     * @var string
+     */
     private $name;
+    /**
+     * @var string
+     */
     private $label;
+    /**
+     * @var array(key => value)
+     */
     private $values;
 
+    /**
+     * @param $name
+     * @param array $values
+     * @param null $label
+     */
     function __construct($name, array $values, $label = null)
     {
         $this->name = $name;
@@ -23,6 +42,9 @@ class Service
         $this->label = $label;
     }
 
+    /**
+     * @param array $datas
+     */
     public function addDatas(array $datas)
     {
         foreach ($datas as $key => $value) {
@@ -78,11 +100,25 @@ class Service
         $this->values = $values;
     }
 
+    /**
+     * @param $key
+     * @return mixed|null
+     */
     public function getValue($key)
     {
-        return $this->values[$key];
+        foreach ($this->values as $keyObject => $value) {
+            if (preg_match('#^' . $key . '$#i', $keyObject)) {
+                return $this->values[$keyObject];
+            }
+        }
+        return null;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return $this
+     */
     public function setValue($key, $value)
     {
         $this->values[$key] = $value;

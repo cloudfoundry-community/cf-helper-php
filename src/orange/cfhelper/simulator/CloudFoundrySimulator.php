@@ -10,23 +10,47 @@
  * Date: 19/08/2014
  */
 namespace orange\cfhelper\simulator;
+/**
+ * Class CloudFoundrySimulator
+ * @package orange\cfhelper\simulator
+ */
 class CloudFoundrySimulator
 {
 
+    /**
+     * @param $manifestYml
+     */
     public static function simulate($manifestYml)
     {
         CloudFoundrySimulator::loadEnv($manifestYml);
     }
 
+    /**
+     * @param $manifestYml
+     */
     public static function loadEnv($manifestYml)
     {
+        if (!is_file($manifestYml)) {
+            return;
+        }
+
         $manifestUnparse = \Symfony\Component\Yaml\Yaml::parse($manifestYml);
         $applications = $manifestUnparse['applications'];
+        if (empty($applications)) {
+            return;
+        }
+
         foreach ($applications as $application) {
+            if (empty($application['env'])) {
+                continue;
+            }
             CloudFoundrySimulator::loadVarEnv($application['env']);
         }
     }
 
+    /**
+     * @param array $envVars
+     */
     public static function loadVarEnv(array $envVars)
     {
         foreach ($envVars as $key => $value) {

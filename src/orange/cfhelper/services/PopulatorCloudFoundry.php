@@ -12,12 +12,28 @@ namespace orange\cfhelper\services;
 
 use orange\cfhelper\application\ApplicationInfo;
 
+/**
+ * Class PopulatorCloudFoundry
+ * @package orange\cfhelper\services
+ */
 class PopulatorCloudFoundry extends Populator
 {
+    /**
+     * @var array
+     */
     private $vcapServices;
+    /**
+     * @var array(string => Service)
+     */
     private $services = array();
+    /**
+     * @var ApplicationInfo
+     */
     private $applicationInfo;
 
+    /**
+     *
+     */
     function __construct()
     {
         parent::__construct();
@@ -27,6 +43,11 @@ class PopulatorCloudFoundry extends Populator
         }
     }
 
+    /**
+     * @param $name
+     * @return null|Service
+     * @throws \Exception
+     */
     public function getService($name)
     {
         if (!empty($this->services[$name])) {
@@ -43,16 +64,24 @@ class PopulatorCloudFoundry extends Populator
         throw new \Exception("Service $name cannot be found.");
     }
 
+    /**
+     * @param $name
+     * @return null|Service
+     */
     private function getServiceFirst($name)
     {
         foreach ($this->vcapServices as $serviceName => $service) {
-            if ($serviceName == $name) {
+            if (preg_match('#^' . $name . '$#i', $serviceName)) {
                 return $this->makeService($service[0]);
             }
         }
         return null;
     }
 
+    /**
+     * @param $service
+     * @return Service
+     */
     private function makeService($service)
     {
         $serviceObject = new Service($service['name'], $service['credentials'], $service['label']);
@@ -64,11 +93,15 @@ class PopulatorCloudFoundry extends Populator
         return $serviceObject;
     }
 
+    /**
+     * @param $name
+     * @return null|Service
+     */
     private function getServiceInside($name)
     {
         foreach ($this->vcapServices as $serviceFirstName => $services) {
             foreach ($services as $service) {
-                if ($service['name'] == $name) {
+                if (preg_match('#^' . $name . '$#i', $service['name'])) {
                     return $this->makeService($service);
                 }
             }
@@ -77,7 +110,7 @@ class PopulatorCloudFoundry extends Populator
     }
 
     /**
-     * @return mixed
+     * @return ApplicationInfo
      */
     public function getApplicationInfo()
     {
@@ -86,7 +119,7 @@ class PopulatorCloudFoundry extends Populator
 
     /**
      * @Required
-     * @param mixed $applicationInfo
+     * @param ApplicationInfo $applicationInfo
      *
      */
     public function setApplicationInfo(ApplicationInfo $applicationInfo)
@@ -95,6 +128,9 @@ class PopulatorCloudFoundry extends Populator
         $this->populateApplicationInfo();
     }
 
+    /**
+     *
+     */
     public function populateApplicationInfo()
     {
         $vcapApplication = json_decode($_ENV['VCAP_APPLICATION'], true);

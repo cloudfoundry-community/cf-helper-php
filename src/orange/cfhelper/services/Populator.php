@@ -9,13 +9,24 @@
  * Date: 01-07-2014
  */
 namespace orange\cfhelper\services;
+/**
+ * Class Populator
+ * @package orange\cfhelper\services
+ */
 abstract class  Populator
 {
 
+    /**
+     *
+     */
     function __construct()
     {
     }
 
+    /**
+     * @param $name
+     * @return Service
+     */
     public abstract function getService($name);
 
 
