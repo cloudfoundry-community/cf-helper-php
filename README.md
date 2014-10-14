@@ -14,7 +14,7 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"orange-opensource/cf-helper-php": "1.2.*"
+"orange-opensource/cf-helper-php": "1.3.*"
 ```
 And include it the page you want to load:
 ```php
