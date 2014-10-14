@@ -14,8 +14,24 @@ namespace orange\cfhelper\simulator;
  * Class CloudFoundrySimulator
  * @package orange\cfhelper\simulator
  */
+/**
+ * Class CloudFoundrySimulator
+ * @package orange\cfhelper\simulator
+ */
 class CloudFoundrySimulator
 {
+    /**
+     *
+     */
+    const KEY_SIMULATE_SERVICE = 'serviceSimulate';
+    /**
+     *
+     */
+    const KEY_SERVICE = 'VCAP_SERVICES';
+    /**
+     *
+     */
+    const KEY_APPLICATION = 'applications';
 
     /**
      * @param $manifestYml
@@ -23,6 +39,7 @@ class CloudFoundrySimulator
     public static function simulate($manifestYml)
     {
         CloudFoundrySimulator::loadEnv($manifestYml);
+        CloudFoundrySimulator::loadService($manifestYml);
     }
 
     /**
@@ -35,7 +52,7 @@ class CloudFoundrySimulator
         }
 
         $manifestUnparse = \Symfony\Component\Yaml\Yaml::parse($manifestYml);
-        $applications = $manifestUnparse['applications'];
+        $applications = $manifestUnparse[self::KEY_APPLICATION];
         if (empty($applications)) {
             return;
         }
@@ -55,6 +72,31 @@ class CloudFoundrySimulator
     {
         foreach ($envVars as $key => $value) {
             $_ENV[$key] = $value;
+        }
+    }
+
+    /**
+     * @param $manifestYml
+     */
+    public static function loadService($manifestYml)
+    {
+        if (!is_file($manifestYml)) {
+            return;
+        }
+        $manifestUnparse = \Symfony\Component\Yaml\Yaml::parse($manifestYml);
+        $services = $manifestUnparse[self::KEY_SIMULATE_SERVICE];
+        if (empty($services)) {
+            return;
+        }
+        foreach ($services as $serviceName => $serviceCredentials) {
+            $service = array(
+                "name" => $serviceName,
+                "label" => "user-provided",
+                "tags" => array(),
+                "credentials" => $serviceCredentials
+            );
+            $serviceUserProvided = array("user-provided" => $service);
+            CloudFoundrySimulator::loadVarEnv(array(self::KEY_SERVICE => json_encode($serviceUserProvided)));
         }
     }
 } 

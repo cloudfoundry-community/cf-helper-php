@@ -14,7 +14,7 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"orange-opensource/cf-helper-php": "1.1.*"
+"orange-opensource/cf-helper-php": "1.2.*"
 ```
 And include it the page you want to load:
 ```php
@@ -40,9 +40,9 @@ For example you have a service called `database` with this credentials:
 You can simply get your service like this:
 ```php
 <?php
-$dbService = $serviceManager->getService('database');
+$dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
-$host = $dbService->getValue('host');
+$host = $dbService->getValue('host');//or regular expression example: getValue('ho[A-Za-z]+')
 //...
 ```
 
@@ -81,6 +81,9 @@ With `cf-helper-php` you can say that you are in development and app will do the
     "type": "development"
 }
 ```
+
+Simulate CloudFoundry environment
+---------------------------------
 
 
 

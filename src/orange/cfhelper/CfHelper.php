@@ -12,6 +12,7 @@
 namespace orange\cfhelper;
 
 use orange\cfhelper\application\ApplicationInfo;
+use orange\cfhelper\configuration\PhpIniConfigurator;
 use orange\cfhelper\services\ServiceManager;
 use orange\cfhelper\simulator\CloudFoundrySimulator;
 use Symfony\Component\Yaml\Yaml;
@@ -22,32 +23,35 @@ use Symfony\Component\Yaml\Yaml;
  */
 class CfHelper
 {
+    const DETECT_CLOUDFOUNDRY = 'VCAP_APPLICATION';
     /**
-     * @var null
+     * @var CfHelper
      */
     private static $_instance = null;
     /**
      * @var \Arhframe\IocArt\BeanLoader|null
      */
     private $beanLoader;
+    /**
+     * @var PhpIniConfigurator
+     */
+    private $phpIniConfigurator;
+
+    /**
+     * @var ServiceManager
+     */
+    private $serviceManager;
+    /**
+     * @var ApplicationInfo
+     */
+    private $applicationInfo;
 
     /**
      *
      */
-    private function __construct()
+    public function __construct()
     {
         $this->beanLoader = \Arhframe\IocArt\BeanLoader::getInstance();
-        $this->setContext(__DIR__ . '/../../../context/main.yml');
-    }
-
-    /**
-     * @param $contextFile
-     */
-    public function setContext($contextFile)
-    {
-        $this->beanLoader->loadContext(realpath($contextFile));
-        $phpIniConfigurator = $this->beanLoader->getBean('cfhelper.phpIniConfigurator');
-        $phpIniConfigurator->loadIniConfig();
     }
 
     /**
@@ -57,16 +61,35 @@ class CfHelper
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new CfHelper();
+            self::$_instance->loadDefaultContext();
         }
         return self::$_instance;
     }
+
+    public function loadDefaultContext()
+    {
+        $this->beanLoader->loadContext(realpath(__DIR__ . '/../../../context/main.yml'));
+        $this->setPhpIniConfigurator($this->beanLoader->getBean('cfhelper.phpIniConfigurator'));
+        $this->serviceManager = $this->beanLoader->getBean('cfhelper.serviceManager');
+        $this->applicationInfo = $this->beanLoader->getBean('cfhelper.applicationInfo');
+    }
+
 
     /**
      * @return ServiceManager
      */
     public function getServiceManager()
     {
-        return $this->beanLoader->getBean('cfhelper.serviceManager');
+        return $this->serviceManager;
+    }
+
+    /**
+     * @param ServiceManager $serviceManager
+     * @Required
+     */
+    public function setServiceManager(ServiceManager $serviceManager)
+    {
+        $this->serviceManager = $serviceManager;
     }
 
     /**
@@ -74,7 +97,16 @@ class CfHelper
      */
     public function getApplicationInfo()
     {
-        return $this->beanLoader->getBean('cfhelper.applicationInfo');
+        return $this->applicationInfo;
+    }
+
+    /**
+     * @param ApplicationInfo $applicationInfo
+     * @Required
+     */
+    public function setApplicationInfo(ApplicationInfo $applicationInfo)
+    {
+        $this->applicationInfo = $applicationInfo;
     }
 
     /**
@@ -84,4 +116,28 @@ class CfHelper
     {
         CloudFoundrySimulator::simulate($manifestYml);
     }
+
+    public function isInCloudFoundry()
+    {
+        return !empty($_ENV[self::DETECT_CLOUDFOUNDRY]);
+    }
+
+    /**
+     * @return PhpIniConfigurator
+     */
+    public function getPhpIniConfigurator()
+    {
+        return $this->phpIniConfigurator;
+    }
+
+    /**
+     * @param PhpIniConfigurator $phpIniConfigurator
+     * @Required
+     */
+    public function setPhpIniConfigurator(PhpIniConfigurator $phpIniConfigurator)
+    {
+        $this->phpIniConfigurator = $phpIniConfigurator;
+        $this->phpIniConfigurator->loadIniConfig();
+    }
+
 }
