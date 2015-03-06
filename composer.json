@@ -12,8 +12,8 @@
     ],
     "require": {
         "arhframe/iocart": "1.0.1",
-        "filp/whoops": "1.1.1",
-        "symfony/yaml": "2.5.3"
+        "filp/whoops": "~1.1",
+        "symfony/yaml": "~2.5"
     },
     "autoload": {
         "psr-0": {
