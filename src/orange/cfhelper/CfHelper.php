@@ -31,9 +31,12 @@ class CfHelper extends SphringRunner
     public function __construct()
     {
         parent::__construct();
-        $this->getSphring()->getRootProject(__DIR__);
+        $this->getSphring()->setFilename(__DIR__ . '/sphring/main.yml');
     }
 
+    /**
+     * @return PhpIniConfigurator
+     */
     public function getPhpIniConfigurator()
     {
         return $this->getSphring()->getBean('cfhelper.phpIniConfigurator');
