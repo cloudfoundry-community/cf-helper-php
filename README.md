@@ -60,6 +60,46 @@ $uris = $applicationInfo->getUris();
 $limits = $applicationInfo->limits
 ```
 
+### Get a connector
+
+`cf-helper-php` provide some connectors by auto-detecting.
+
+It give you the possibility to have a PDO object when database is provided in services, or  a Predis\Client object when you provide a redis (look at [Predis](https://github.com/nrk/predis) ) or a [MongoClient](http://php.net/manual/fr/class.mongodb.php) object when a mongodb is provided.
+
+To get this access just follow this this:
+```php
+<?php
+$pdo = CfHelper::getInstance()->getDatabaseConnector()->getConnection();
+$redis = CfHelper::getInstance()->getRedisConnector()->getConnection();
+$mongodb = CfHelper::getInstance()->getMongoDbConnector()->getConnection();
+```
+
+You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConnector>Connector()->getCredentials()` it will give you an array with:
+
+ - host
+ - port
+ - pass
+ - user
+ - url (if url is provided by the service)
+ - sentencePdo (**only** for database connector)
+ - database (**only** for database connector)
+
+You also must follow a convention when naming your service to make `cf-helper-php` do auto-detect, it must contains one those value in service name:
+
+ - For database connector:
+  - `my` (for mysql)
+  - `db`
+  - `database`
+  - `oracle`
+  - `oci`
+  - `postgres`
+  - `pgsql`
+  - `maria`
+ - For redis connector:
+  - redis
+ - For mongodb connector
+  - mongodb
+
 Set php configuration
 -------------------------
 With [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) you can set a `.user.ini` file to set your php configuration but it's not very flexible, you can also use directly `ini_set()` but you will have to do all by your own.
