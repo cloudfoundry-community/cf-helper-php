@@ -1,27 +1,33 @@
 {
-    "name": "orange-opensource/cf-helper-php",
-    "description": "Cloudfoundry helper in php",
-    "minimum-stability": "stable",
-    "license": "MIT",
-    "keywords": ["cloudfoundry", "helper", "services", "vcapservices"],
-    "authors": [
-        {
-            "name": "Arthur Haler",
-            "email": "arthur.halet@orange.com"
-        }
-    ],
-    "require": {
-        "arhframe/iocart": "1.0.1",
-        "filp/whoops": "~1.1",
-        "symfony/yaml": "~2.5"
-    },
-    "autoload": {
-        "psr-0": {
-            "orange\\cfhelper\\services": "src/",
-            "orange\\cfhelper\\application": "src/",
-            "orange\\cfhelper\\configuration": "src/",
-            "orange\\cfhelper\\simulator": "src/",
-            "orange\\cfhelper": "src"
-        }
+  "name": "orange-opensource/cf-helper-php",
+  "description": "Cloudfoundry helper in php",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "keywords": [
+    "cloudfoundry",
+    "helper",
+    "services",
+    "vcapservices"
+  ],
+  "authors": [
+    {
+      "name": "Arthur Haler",
+      "email": "arthur.halet@orange.com"
     }
+  ],
+  "require": {
+    "sphring/sphring": "~0.10",
+    "filp/whoops": "~1.1",
+    "symfony/yaml": "~2.5",
+    "composer/composer": "1.0.0-alpha9"
+  },
+  "autoload": {
+    "psr-0": {
+      "orange\\cfhelper\\services": "src/",
+      "orange\\cfhelper\\application": "src/",
+      "orange\\cfhelper\\configuration": "src/",
+      "orange\\cfhelper\\simulator": "src/",
+      "orange\\cfhelper": "src"
+    }
+  }
 }
