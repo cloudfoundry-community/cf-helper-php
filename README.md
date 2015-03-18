@@ -96,9 +96,9 @@ You also must follow a convention when naming your service to make `cf-helper-ph
   - `pgsql`
   - `maria`
  - For redis connector:
-  - redis
+  - `redis`
  - For mongodb connector
-  - mongodb
+  - `mongodb`
 
 Set php configuration
 -------------------------
