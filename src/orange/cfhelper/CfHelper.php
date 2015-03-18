@@ -85,4 +85,14 @@ class CfHelper extends SphringRunner
     {
         return $this->getSphring()->getBean('cfhelper.connectors');
     }
+
+    public function getDatabaseConnector()
+    {
+        return $this->getSphring()->getBean('cfhelper.connector.database');
+    }
+
+    public function getRedisConnector()
+    {
+        return $this->getSphring()->getBean('cfhelper.connector.redis');
+    }
 }
