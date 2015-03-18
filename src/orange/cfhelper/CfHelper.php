@@ -15,6 +15,7 @@ use Arthurh\Sphring\Runner\SphringRunner;
 use Arthurh\Sphring\Sphring;
 use orange\cfhelper\application\ApplicationInfo;
 use orange\cfhelper\configuration\PhpIniConfigurator;
+use orange\cfhelper\logger\CloudFoundryLogger;
 use orange\cfhelper\services\ServiceManager;
 use orange\cfhelper\simulator\CloudFoundrySimulator;
 use Symfony\Component\Yaml\Yaml;
@@ -72,5 +73,16 @@ class CfHelper extends SphringRunner
         return !empty($_ENV[self::DETECT_CLOUDFOUNDRY]);
     }
 
+    /**
+     * @return CloudFoundryLogger
+     */
+    public function getLogger()
+    {
+        return $this->getSphring()->getBean('cfhelper.logger.logger');
+    }
 
+    public function getConnectors()
+    {
+        return $this->getSphring()->getBean('cfhelper.connectors');
+    }
 }

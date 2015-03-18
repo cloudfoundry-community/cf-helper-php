@@ -17,3 +17,31 @@ cfhelper.phpIniConfigurator:
       ref: cfhelper.serviceManager
     applicationInfo:
       ref: cfhelper.applicationInfo
+cfhelper.logger.handler:
+  class: orange\cfhelper\logger\CloudFoundryHandler
+cfhelper.logger.logger:
+  class: orange\cfhelper\logger\CloudFoundryLogger
+  methodInit: loadCloudFoundryHandler
+  properties:
+    cloudFoundryHandler:
+      ref: cfhelper.logger.handler
+cfhelper.connector.abstract:
+  type: abstract
+  properties:
+    serviceManager:
+      ref: cfhelper.serviceManager
+cfhelper.connector.database:
+  class: orange\cfhelper\connectors\DatabaseConnector
+  methodInit: load
+  extend: cfhelper.connector.abstract
+cfhelper.connector.redis:
+  class: orange\cfhelper\connectors\RedisConnector
+  methodInit: load
+  extend: cfhelper.connector.abstract
+cfhelper.connectors:
+  class: \ArrayObject
+  constructor:
+    connectors:
+      ref:
+        - cfhelper.connector.database
+        - cfhelper.connector.redis
