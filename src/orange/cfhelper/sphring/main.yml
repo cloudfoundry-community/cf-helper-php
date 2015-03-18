@@ -2,17 +2,17 @@ cfhelper.applicationInfo:
   class: orange\cfhelper\application\ApplicationInfo
 cfhelper.populator:
   class: orange\cfhelper\services\PopulatorCloudFoundry
-  property:
+  properties:
     applicationInfo:
       ref: cfhelper.applicationInfo
 cfhelper.serviceManager:
   class: orange\cfhelper\services\ServiceManager
-  property:
+  properties:
     populator:
       ref: cfhelper.populator
 cfhelper.phpIniConfigurator:
   class: orange\cfhelper\configuration\PhpIniConfigurator
-  property:
+  properties:
     serviceManager:
       ref: cfhelper.serviceManager
     applicationInfo:
