@@ -54,6 +54,7 @@ abstract class AbstractConnector
     {
         $url = $service->getValue('(uri|url)');
         if (!empty($url)) {
+            $toReturn['url'] = $url;
             return $this->parseUrl($url);
         }
         $host = $service->getValue('.*host.*');

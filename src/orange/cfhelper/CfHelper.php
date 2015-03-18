@@ -15,6 +15,9 @@ use Arthurh\Sphring\Runner\SphringRunner;
 use Arthurh\Sphring\Sphring;
 use orange\cfhelper\application\ApplicationInfo;
 use orange\cfhelper\configuration\PhpIniConfigurator;
+use orange\cfhelper\connectors\AbstractConnector;
+use orange\cfhelper\connectors\DatabaseConnector;
+use orange\cfhelper\connectors\RedisConnector;
 use orange\cfhelper\logger\CloudFoundryLogger;
 use orange\cfhelper\services\ServiceManager;
 use orange\cfhelper\simulator\CloudFoundrySimulator;
@@ -81,18 +84,31 @@ class CfHelper extends SphringRunner
         return $this->getSphring()->getBean('cfhelper.logger.logger');
     }
 
+    /**
+     * @return AbstractConnector[]
+     */
     public function getConnectors()
     {
         return $this->getSphring()->getBean('cfhelper.connectors');
     }
 
+    /**
+     * @return DatabaseConnector
+     */
     public function getDatabaseConnector()
     {
         return $this->getSphring()->getBean('cfhelper.connector.database');
     }
 
+    /**
+     * @return RedisConnector
+     */
     public function getRedisConnector()
     {
+        return $this->getSphring()->getBean('cfhelper.connector.redis');
+    }
+
+    public function getMongoDbConnector(){
         return $this->getSphring()->getBean('cfhelper.connector.redis');
     }
 }

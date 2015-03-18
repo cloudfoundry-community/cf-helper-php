@@ -58,7 +58,7 @@ class DatabaseConnector extends AbstractConnector
 
     private function parseDbFromService(Service $service)
     {
-        $toReturn = $this->parseDbFromService($service);
+        $toReturn = $this->parseFromService($service);
 
         if (!empty($toReturn['port'])) {
             $toReturn['port'] = sprintf("port=%s;", $toReturn['port']);

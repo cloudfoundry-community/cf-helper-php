@@ -38,6 +38,10 @@ cfhelper.connector.redis:
   class: orange\cfhelper\connectors\RedisConnector
   methodInit: load
   extend: cfhelper.connector.abstract
+cfhelper.connector.mongo:
+  class: orange\cfhelper\connectors\MongoDbConnector
+  methodInit: load
+  extend: cfhelper.connector.abstract
 cfhelper.connectors:
   class: \ArrayObject
   constructor:
@@ -45,3 +49,4 @@ cfhelper.connectors:
       ref:
         - cfhelper.connector.database
         - cfhelper.connector.redis
+        - cfhelper.connector.mongo
