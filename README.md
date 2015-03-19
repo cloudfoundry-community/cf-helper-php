@@ -100,6 +100,15 @@ You also must follow a convention when naming your service to make `cf-helper-ph
  - For mongodb connector
   - `mongodb`
 
+### Get the logger
+
+You have also access to a logger set for Cloud Foundry environment, access to it like this:
+
+```php
+<?php
+$logger = CfHelper::getInstance()->getLogger();
+```
+
 Set php configuration
 -------------------------
 With [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) you can set a `.user.ini` file to set your php configuration but it's not very flexible, you can also use directly `ini_set()` but you will have to do all by your own.

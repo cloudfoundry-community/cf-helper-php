@@ -17,6 +17,7 @@ use orange\cfhelper\application\ApplicationInfo;
 use orange\cfhelper\configuration\PhpIniConfigurator;
 use orange\cfhelper\connectors\AbstractConnector;
 use orange\cfhelper\connectors\DatabaseConnector;
+use orange\cfhelper\connectors\MongoDbConnector;
 use orange\cfhelper\connectors\RedisConnector;
 use orange\cfhelper\logger\CloudFoundryLogger;
 use orange\cfhelper\services\ServiceManager;
@@ -26,6 +27,8 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Class CfHelper
  * @package orange\cfhelper
+ *
+ * @method
  */
 class CfHelper extends SphringRunner
 {
@@ -108,7 +111,11 @@ class CfHelper extends SphringRunner
         return $this->getSphring()->getBean('cfhelper.connector.redis');
     }
 
-    public function getMongoDbConnector(){
-        return $this->getSphring()->getBean('cfhelper.connector.redis');
+    /**
+     * @return MongoDbConnector
+     */
+    public function getMongoDbConnector()
+    {
+        return $this->getSphring()->getBean('cfhelper.connector.mongo');
     }
 }
