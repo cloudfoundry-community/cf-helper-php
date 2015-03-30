@@ -11,8 +11,7 @@
  */
 
 
-namespace orange\cfhelper\connectors;
-
+namespace CfCommunity\CfHelper\Connectors;
 
 use Predis\Client;
 

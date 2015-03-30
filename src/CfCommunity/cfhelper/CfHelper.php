@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014 Orange
+ * Copyright (C) 2014 Arthur Halet
  *
  * This software is distributed under the terms and conditions of the 'MIT' license which can be
  * found in the file 'LICENSE' in this package distribution or at 'http://opensource.org/licenses/MIT'.
@@ -9,26 +9,24 @@
  * Date: 01-07-2014
  */
 
-namespace orange\cfhelper;
+namespace CfCommunity\CfHelper;
 
 use Arthurh\Sphring\Runner\SphringRunner;
 use Arthurh\Sphring\Sphring;
-use orange\cfhelper\application\ApplicationInfo;
-use orange\cfhelper\configuration\PhpIniConfigurator;
-use orange\cfhelper\connectors\AbstractConnector;
-use orange\cfhelper\connectors\DatabaseConnector;
-use orange\cfhelper\connectors\MongoDbConnector;
-use orange\cfhelper\connectors\RedisConnector;
-use orange\cfhelper\logger\CloudFoundryLogger;
-use orange\cfhelper\services\ServiceManager;
-use orange\cfhelper\simulator\CloudFoundrySimulator;
+use CfCommunity\CfHelper\Application\ApplicationInfo;
+use CfCommunity\CfHelper\Configuration\PhpIniConfigurator;
+use CfCommunity\CfHelper\Connectors\AbstractConnector;
+use CfCommunity\CfHelper\Connectors\DatabaseConnector;
+use CfCommunity\CfHelper\Connectors\MongoDbConnector;
+use CfCommunity\CfHelper\Connectors\RedisConnector;
+use CfCommunity\CfHelper\Logger\CloudFoundryLogger;
+use CfCommunity\CfHelper\Services\ServiceManager;
+use CfCommunity\CfHelper\Simulator\CloudFoundrySimulator;
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CfHelper
- * @package orange\cfhelper
- *
- * @method
+ * @package CfCommunity\CfHelper
  */
 class CfHelper extends SphringRunner
 {

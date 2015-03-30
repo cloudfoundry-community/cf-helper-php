@@ -11,11 +11,11 @@
  */
 
 
-namespace orange\cfhelper\connectors;
+namespace CfCommunity\CfHelper\Connectors;
 
 
-use orange\cfhelper\services\Service;
-use orange\cfhelper\services\ServiceManager;
+use CfCommunity\CfHelper\Services\Service;
+use CfCommunity\CfHelper\Services\ServiceManager;
 
 abstract class AbstractConnector
 {

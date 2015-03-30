@@ -14,13 +14,13 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"orange-opensource/cf-helper-php": "1.3.*"
+"cloudfoundry-community/cf-helper-php": "1.4.*"
 ```
 And include it the page you want to load:
 ```php
 <?php
 require_once __DIR__ .'/vendor/autoload.php';
-use orange\cfhelper\CfHelper;
+use CfCommunity\CfHelper\CfHelper;
 $cfHelper = CfHelper::getInstance();
 ```
 You can access the service binding or application information through the service manager class

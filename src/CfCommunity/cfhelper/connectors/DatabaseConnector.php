@@ -10,13 +10,14 @@
  * Date: 08/03/2015
  */
 
-namespace orange\cfhelper\connectors;
+namespace CfCommunity\CfHelper\Connectors;
+use CfCommunity\CfHelper\Services\Service;
 
 
-use orange\cfhelper\CfHelper;
-use orange\cfhelper\connectors\AbstractConnector;
-use orange\cfhelper\services\Service;
-
+/**
+ * Class DatabaseConnector
+ * @package CfCommunity\CfHelper\Connectors
+ */
 class DatabaseConnector extends AbstractConnector
 {
 

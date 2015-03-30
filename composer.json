@@ -1,5 +1,5 @@
 {
-  "name": "orange-opensource/cf-helper-php",
+  "name": "cloudfoundry-community/cf-helper-php",
   "description": "Cloudfoundry helper in php",
   "minimum-stability": "stable",
   "license": "MIT",
@@ -11,7 +11,7 @@
   ],
   "authors": [
     {
-      "name": "Arthur Haler",
+      "name": "Arthur Halet",
       "email": "arthur.halet@orange.com"
     }
   ],
@@ -26,7 +26,7 @@
   },
   "autoload": {
     "psr-4": {
-      "orange\\cfhelper\\": "src/orange/cfhelper/"
+      "CfCommunity\\CfHelper\\": "src/CfCommunity/CfHelper/"
     }
   },
   "suggest": {

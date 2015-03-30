@@ -11,14 +11,17 @@
  */
 
 
-namespace orange\cfhelper\connectors;
+namespace CfCommunity\CfHelper\Connectors;
 
-
+/**
+ * Class MongoDbConnector
+ * @package CfCommunity\CfHelper\Connectors
+ */
 class MongoDbConnector extends AbstractConnector
 {
 
     /**
-     * @var MongoClient;
+     * @var \MongoClient;
      */
     private $connection;
 
@@ -40,11 +43,11 @@ class MongoDbConnector extends AbstractConnector
         if (!class_exists("\\MongoClient")) {
             return null;
         }
-        $this->connection = new MongoClient($this->credentials['url']);
+        $this->connection = new \MongoClient($this->credentials['url']);
     }
 
     /**
-     * @return MongoClient
+     * @return \MongoClient
      */
     public function getConnection()
     {

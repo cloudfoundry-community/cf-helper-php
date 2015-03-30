@@ -11,12 +11,16 @@
  */
 
 
-namespace orange\cfhelper\logger;
+namespace CfCommunity\CfHelper\Logger;
 
 
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
 
+/**
+ * Class CloudFoundryLogger
+ * @package CfCommunity\CfHelper\Logger
+ */
 class CloudFoundryLogger extends Logger
 {
     /**

@@ -1,26 +1,26 @@
 cfhelper.applicationInfo:
-  class: orange\cfhelper\application\ApplicationInfo
+  class: CfCommunity\CfHelper\Application\ApplicationInfo
 cfhelper.populator:
-  class: orange\cfhelper\services\PopulatorCloudFoundry
+  class: CfCommunity\CfHelper\Services\PopulatorCloudFoundry
   properties:
     applicationInfo:
       ref: cfhelper.applicationInfo
 cfhelper.serviceManager:
-  class: orange\cfhelper\services\ServiceManager
+  class: CfCommunity\CfHelper\Services\ServiceManager
   properties:
     populator:
       ref: cfhelper.populator
 cfhelper.phpIniConfigurator:
-  class: orange\cfhelper\configuration\PhpIniConfigurator
+  class: CfCommunity\CfHelper\Configuration\PhpIniConfigurator
   properties:
     serviceManager:
       ref: cfhelper.serviceManager
     applicationInfo:
       ref: cfhelper.applicationInfo
 cfhelper.logger.handler:
-  class: orange\cfhelper\logger\CloudFoundryHandler
+  class: CfCommunity\CfHelper\Logger\CloudFoundryHandler
 cfhelper.logger.logger:
-  class: orange\cfhelper\logger\CloudFoundryLogger
+  class: CfCommunity\CfHelper\Logger\CloudFoundryLogger
   methodInit: loadCloudFoundryHandler
   properties:
     cloudFoundryHandler:
@@ -31,15 +31,15 @@ cfhelper.connector.abstract:
     serviceManager:
       ref: cfhelper.serviceManager
 cfhelper.connector.database:
-  class: orange\cfhelper\connectors\DatabaseConnector
+  class: CfCommunity\CfHelper\Connectors\DatabaseConnector
   methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connector.redis:
-  class: orange\cfhelper\connectors\RedisConnector
+  class: CfCommunity\CfHelper\Connectors\RedisConnector
   methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connector.mongo:
-  class: orange\cfhelper\connectors\MongoDbConnector
+  class: CfCommunity\CfHelper\Connectors\MongoDbConnector
   methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connectors:

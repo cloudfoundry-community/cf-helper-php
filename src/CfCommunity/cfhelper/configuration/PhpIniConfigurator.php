@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014 Orange
+ * Copyright (C) 2014 Arthur Halet
  *
  * This software is distributed under the terms and conditions of the 'MIT' license which can be
  * found in the file 'LICENSE' in this package distribution or at 'http://opensource.org/licenses/MIT'.
@@ -9,15 +9,15 @@
  * Date: 01-07-2014
  */
 
-namespace orange\cfhelper\configuration;
+namespace CfCommunity\CfHelper\Configuration;
 
+use CfCommunity\CfHelper\Services\ServiceManager;
+use CfCommunity\CfHelper\Application\ApplicationInfo;
 
-use orange\cfhelper\application\ApplicationInfo;
-use orange\cfhelper\services\ServiceManager;
 
 /**
  * Class PhpIniConfigurator
- * @package orange\cfhelper\configuration
+ * @package CfCommunity\CfHelper\Configuration
  */
 class PhpIniConfigurator
 {

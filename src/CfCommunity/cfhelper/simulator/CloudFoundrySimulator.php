@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014 Orange
+ * Copyright (C) 2014 Arthur Halet
  *
  * This software is distributed under the terms and conditions of the 'MIT'
  * license which can be found in the file 'LICENSE' in this package distribution
@@ -9,14 +9,10 @@
  * Author: Arthur Halet
  * Date: 19/08/2014
  */
-namespace orange\cfhelper\simulator;
+namespace CfCommunity\CfHelper\Simulator;
 /**
  * Class CloudFoundrySimulator
- * @package orange\cfhelper\simulator
- */
-/**
- * Class CloudFoundrySimulator
- * @package orange\cfhelper\simulator
+ * @package CfCommunity\CfHelper\Simulator
  */
 class CloudFoundrySimulator
 {

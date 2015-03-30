@@ -11,12 +11,16 @@
  */
 
 
-namespace orange\cfhelper\logger;
+namespace CfCommunity\CfHelper\Logger;
 
 
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
 
+/**
+ * Class CloudFoundryHandler
+ * @package CfCommunity\CfHelper\Logger
+ */
 class CloudFoundryHandler extends SyslogHandler
 {
     public function __construct($level = Logger::DEBUG, $bubble = true, $logopts = LOG_PID)
