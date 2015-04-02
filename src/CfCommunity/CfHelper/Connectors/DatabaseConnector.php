@@ -58,7 +58,7 @@ class DatabaseConnector extends AbstractConnector
         $this->loadDatabaseFromDbParsed();
     }
 
-    private function parseDbFromService(Service $service)
+    public function parseDbFromService(Service $service)
     {
         $toReturn = $this->parseFromService($service);
 
