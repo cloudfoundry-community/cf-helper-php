@@ -29,5 +29,9 @@ abstract class  Populator
      */
     public abstract function getService($name);
 
+    /**
+     * @return Service[]
+     */
+    public abstract function getAllServices();
 
 }
