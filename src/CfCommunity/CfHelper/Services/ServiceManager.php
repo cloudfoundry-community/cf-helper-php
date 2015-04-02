@@ -57,4 +57,12 @@ class ServiceManager
     {
         return $this->populator->getService($name);
     }
+
+    /**
+     * @return Service[]
+     */
+    public function getAllServices()
+    {
+        return $this->populator->getAllServices();
+    }
 }
