@@ -77,6 +77,7 @@ class DatabaseConnector extends AbstractConnector
         if (empty($type)) {
             $type = $this->getDbTypeFromServiceName($service->getName());
         }
+        $toReturn['type'] = $type;
         $toReturn['sentencePdo'] = sprintf(self::SENTENCE_PDO, $type,
             $toReturn['host'], $toReturn['port'], $database);
 
