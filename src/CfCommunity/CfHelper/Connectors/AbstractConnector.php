@@ -76,7 +76,7 @@ abstract class AbstractConnector
         $toReturn['port'] = $parsedUrl['port'];
         $toReturn['user'] = $parsedUrl['user'];
         $toReturn['pass'] = $parsedUrl['pass'];
-        $toReturn['scheme'] = $parsedUrl['pass'];
+        $toReturn['scheme'] = $parsedUrl['scheme'];
         $toReturn['path'] = str_replace('/', '', $parsedUrl['path']);
         return $toReturn;
     }
