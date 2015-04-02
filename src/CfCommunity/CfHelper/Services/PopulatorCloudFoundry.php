@@ -9,6 +9,7 @@
  * Date: 01-07-2014
  */
 namespace CfCommunity\CfHelper\Services;
+
 use CfCommunity\CfHelper\Application\ApplicationInfo;
 
 
@@ -146,6 +147,22 @@ class PopulatorCloudFoundry extends Populator
                 $this->applicationInfo->$key = $value;
             }
         }
+    }
+
+    /**
+     * @return Service[]
+     */
+    public function getAllServices()
+    {
+        foreach ($this->vcapServices as $serviceFirstName => $services) {
+            foreach ($services as $service) {
+                if (empty($service['name'])) {
+                    continue;
+                }
+                $this->makeService($service);
+            }
+        }
+        return $this->services;
     }
 
 }

@@ -11,6 +11,7 @@
  */
 
 namespace CfCommunity\CfHelper\Connectors;
+
 use CfCommunity\CfHelper\Services\Service;
 
 
@@ -101,6 +102,9 @@ class DatabaseConnector extends AbstractConnector
 
     private function loadDatabaseFromDbParsed()
     {
+        if (!class_exists("\\PDO")) {
+            return null;
+        }
         if (is_array($this->credentials)) {
             $this->connection = new \PDO($this->credentials['sentencePdo'], $this->credentials['user'], $this->credentials['pass']);
         } else {
