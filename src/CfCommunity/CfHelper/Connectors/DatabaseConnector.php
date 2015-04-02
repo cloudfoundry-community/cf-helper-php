@@ -67,7 +67,11 @@ class DatabaseConnector extends AbstractConnector
         } else {
             $toReturn['port'] = "";
         }
-        $type = $service->getValue('.*(type).*');
+        if ($toReturn['scheme']) {
+            $type = $toReturn['scheme'];
+        } else {
+            $type = $service->getValue('.*(type).*');
+        }
         if (empty($toReturn['path'])) {
             $database = $service->getValue('.*(name|database|db).*');
         } else {
