@@ -21,6 +21,7 @@ use CfCommunity\CfHelper\Application\ApplicationInfo;
  */
 class PhpIniConfigurator
 {
+    const FILECONFIGURATION = "cfhelper.json";
     /**
      * @var string
      */
@@ -51,10 +52,10 @@ class PhpIniConfigurator
      */
     public function loadConfigCfHelper()
     {
-        if (!is_file(__DIR__ . '/../../../../../../../composer.json')) {
+        if (!is_file(__DIR__ . '/../../../../../../../' . PhpIniConfigurator::FILECONFIGURATION)) {
             return;
         }
-        $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../composer.json'), true);
+        $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../' . PhpIniConfigurator::FILECONFIGURATION), true);
         if (empty($composerJson['cfhelper'])) {
             return;
         }
@@ -89,8 +90,8 @@ class PhpIniConfigurator
         if ($servicePhpIni != null) {
             $arrayValues = $servicePhpIni->getValues();
         }
-        if (is_file(__DIR__ . '/../../../../../../../composer.json')) {
-            $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../composer.json'), true);
+        if (is_file(__DIR__ . '/../../../../../../../' . PhpIniConfigurator::FILECONFIGURATION)) {
+            $composerJson = json_decode(file_get_contents(__DIR__ . '/../../../../../../../' . PhpIniConfigurator::FILECONFIGURATION), true);
             if (empty($composerJson['php-ini'])) {
                 return;
             }

@@ -43,6 +43,10 @@ You can simply get your service like this:
 $dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
 $host = $dbService->getValue('host');//or regular expression example: getValue('ho[A-Za-z]+')
+
+//get all your services
+$services = $serviceManager->getAllServices();
+
 //...
 ```
 
@@ -113,7 +117,7 @@ Set php configuration
 -------------------------
 With [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) you can set a `.user.ini` file to set your php configuration but it's not very flexible, you can also use directly `ini_set()` but you will have to do all by your own.
 
-So with `cf-helper-php` we help you to set your php configuration, add in your composer.json a `php-ini` variable and set your php configuration, example:
+So with `cf-helper-php` we help you to set your php configuration, add in a new file in root project directory called `cfhelper.json` a `php-ini` variable and set your php configuration, example:
 ```json
 "php-ini": {
     "display_errors": "On",
@@ -124,8 +128,9 @@ So with `cf-helper-php` we help you to set your php configuration, add in your c
 Set your php project in development mode
 ----------------------------------------
 By default this two buildpacks hide error and it's not very good when you're in development phase. 
-With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that add in your composer.json a `cfhelper` variable and put `type` variable in `developement`:
+With `cf-helper-php` you can say that you are in development and app will do the rest and even show you error with [filp/whoops](https://github.com/filp/whoops) package, to do that add in a new file in root project directory called `cfhelper.json` a `cfhelper` variable and put `type` variable in `developement`:
 ```json
+//in cfhelper.json in your root project directory
 "cfhelper":{
     "type": "development"
 }
