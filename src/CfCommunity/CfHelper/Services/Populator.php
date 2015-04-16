@@ -30,6 +30,11 @@ abstract class  Populator
     public abstract function getService($name);
 
     /**
+     *
+     */
+    public abstract function load();
+
+    /**
      * @return Service[]
      */
     public abstract function getAllServices();

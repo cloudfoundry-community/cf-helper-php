@@ -2,6 +2,7 @@ cfhelper.applicationInfo:
   class: CfCommunity\CfHelper\Application\ApplicationInfo
 cfhelper.populator:
   class: CfCommunity\CfHelper\Services\PopulatorCloudFoundry
+  methodInit: load
   properties:
     applicationInfo:
       ref: cfhelper.applicationInfo

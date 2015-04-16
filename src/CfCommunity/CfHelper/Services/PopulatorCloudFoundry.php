@@ -46,7 +46,6 @@ class PopulatorCloudFoundry extends Populator
      */
     public function getService($name)
     {
-        $this->vcapServices = json_decode($_ENV['VCAP_SERVICES'], true);
         if (empty($this->vcapServices)) {
             $this->vcapServices = array();
         }
@@ -165,4 +164,14 @@ class PopulatorCloudFoundry extends Populator
         return $this->services;
     }
 
+    /**
+     *
+     */
+    public function load()
+    {
+        if (!isset($_ENV['VCAP_SERVICES']) || $this->vcapServices !== null) {
+            return;
+        }
+        $this->vcapServices = json_decode($_ENV['VCAP_SERVICES'], true);
+    }
 }
