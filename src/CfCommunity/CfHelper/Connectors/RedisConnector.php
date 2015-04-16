@@ -22,6 +22,17 @@ class RedisConnector extends AbstractConnector
      */
     private $connection;
 
+    /**
+     * @return Client
+     */
+    public function getConnection()
+    {
+        if ($this->connection === null) {
+            $this->load();
+        }
+        return $this->connection;
+    }
+
     public function load()
     {
         $redisService = $this->serviceManager->getService('.*redis.*');
@@ -46,13 +57,5 @@ class RedisConnector extends AbstractConnector
             'port' => $this->credentials['port'],
             'password' => $this->credentials['pass'],
         ]);
-    }
-
-    /**
-     * @return Client
-     */
-    public function getConnection()
-    {
-        return $this->connection;
     }
 }

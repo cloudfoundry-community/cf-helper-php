@@ -25,6 +25,17 @@ class MongoDbConnector extends AbstractConnector
      */
     private $connection;
 
+    /**
+     * @return \MongoClient
+     */
+    public function getConnection()
+    {
+        if ($this->connection === null) {
+            $this->load();
+        }
+        return $this->connection;
+    }
+
     public function load()
     {
         $redisService = $this->serviceManager->getService('.*mongo.*');
@@ -44,13 +55,5 @@ class MongoDbConnector extends AbstractConnector
             return null;
         }
         $this->connection = new \MongoClient($this->credentials['url']);
-    }
-
-    /**
-     * @return \MongoClient
-     */
-    public function getConnection()
-    {
-        return $this->connection;
     }
 }

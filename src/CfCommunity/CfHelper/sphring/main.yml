@@ -32,15 +32,12 @@ cfhelper.connector.abstract:
       ref: cfhelper.serviceManager
 cfhelper.connector.database:
   class: CfCommunity\CfHelper\Connectors\DatabaseConnector
-  methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connector.redis:
   class: CfCommunity\CfHelper\Connectors\RedisConnector
-  methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connector.mongo:
   class: CfCommunity\CfHelper\Connectors\MongoDbConnector
-  methodInit: load
   extend: cfhelper.connector.abstract
 cfhelper.connectors:
   class: \ArrayObject

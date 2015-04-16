@@ -39,6 +39,9 @@ class DatabaseConnector extends AbstractConnector
      */
     public function getConnection()
     {
+        if ($this->connection === null) {
+            $this->load();
+        }
         return $this->connection;
     }
 
@@ -68,9 +71,9 @@ class DatabaseConnector extends AbstractConnector
             $toReturn['port'] = "";
         }
         if (isset($toReturn['scheme']) && !empty($toReturn['scheme'])) {
-            $type = $toReturn['scheme'];
+            $type = $this->getDbTypeFromServiceName($toReturn['scheme']);
         } else {
-            $type = $service->getValue('.*(type).*');
+            $type = $this->getDbTypeFromServiceName($service->getValue('.*(type).*'));
         }
         if (empty($toReturn['path'])) {
             $database = $service->getValue('.*(name|database|db).*');
