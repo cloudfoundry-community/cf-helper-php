@@ -65,11 +65,7 @@ class DatabaseConnector extends AbstractConnector
     {
         $toReturn = $this->parseFromService($service);
 
-        if (!empty($toReturn['port'])) {
-            $toReturn['port'] = sprintf("port=%s;", $toReturn['port']);
-        } else {
-            $toReturn['port'] = "";
-        }
+
         if (isset($toReturn['scheme']) && !empty($toReturn['scheme'])) {
             $type = $this->getDbTypeFromServiceName($toReturn['scheme']);
         } else {
@@ -88,8 +84,13 @@ class DatabaseConnector extends AbstractConnector
             $type = $this->getDbTypeFromServiceName($service->getLabel());
         }
         $toReturn['type'] = $type;
+        if (!empty($toReturn['port'])) {
+            $portPdo = sprintf("port=%s;", $toReturn['port']);
+        } else {
+            $portPdo = "";
+        }
         $toReturn['sentencePdo'] = sprintf(self::SENTENCE_PDO, $type,
-            $toReturn['host'], $toReturn['port'], $database);
+            $toReturn['host'], $portPdo, $database);
 
         return $toReturn;
     }
