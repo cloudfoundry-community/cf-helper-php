@@ -11,7 +11,7 @@
 namespace CfCommunity\CfHelper\Services;
 
 use CfCommunity\CfHelper\Application\ApplicationInfo;
-
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
 /**
  * Class PopulatorCloudFoundry

@@ -16,6 +16,7 @@ namespace CfCommunity\CfHelper\Logger;
 
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
 /**
  * Class CloudFoundryLogger

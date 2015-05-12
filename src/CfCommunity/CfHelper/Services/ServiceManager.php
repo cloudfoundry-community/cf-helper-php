@@ -11,6 +11,7 @@
 
 namespace CfCommunity\CfHelper\Services;
 
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
 /**
  * Class ServiceManager

@@ -13,7 +13,7 @@ namespace CfCommunity\CfHelper\Configuration;
 
 use CfCommunity\CfHelper\Services\ServiceManager;
 use CfCommunity\CfHelper\Application\ApplicationInfo;
-
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
 /**
  * Class PhpIniConfigurator

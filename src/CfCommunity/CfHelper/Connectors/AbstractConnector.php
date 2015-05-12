@@ -16,6 +16,7 @@ namespace CfCommunity\CfHelper\Connectors;
 
 use CfCommunity\CfHelper\Services\Service;
 use CfCommunity\CfHelper\Services\ServiceManager;
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
 abstract class AbstractConnector
 {
