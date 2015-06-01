@@ -40,6 +40,7 @@ For example you have a service called `database` with this credentials:
 You can simply get your service like this:
 ```php
 <?php
+$serviceManager = CfHelper::getInstance()->getServiceManager();
 $dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
 $host = $dbService->getValue('host');//or regular expression example: getValue('ho[A-Za-z]+')
