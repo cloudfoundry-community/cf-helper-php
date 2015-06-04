@@ -105,6 +105,27 @@ You also must follow a convention when naming your service to make `cf-helper-ph
  - For mongodb connector
   - `mongodb`
 
+### Example usage of pdo connector
+
+```php
+<?php
+require_once __DIR__ .'/vendor/autoload.php';
+use CfCommunity\CfHelper\CfHelper;
+$cfHelper = CfHelper::getInstance();
+try {
+    //if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
+    if ($cfHelper->isInCloudFoundry()) {
+        $db = $cfHelper->getDatabaseConnector()->getConnection();
+    } else {
+        $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
+    }
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+//...
+```
+
 ### Get the logger
 
 You have also access to a logger set for Cloud Foundry environment, access to it like this:
