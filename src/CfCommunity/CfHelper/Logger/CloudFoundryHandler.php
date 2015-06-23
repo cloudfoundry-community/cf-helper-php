@@ -14,18 +14,19 @@
 namespace CfCommunity\CfHelper\Logger;
 
 
-use Monolog\Handler\SyslogHandler;
+use Monolog\Handler\ErrorLogHandler;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 
 /**
  * Class CloudFoundryHandler
  * @package CfCommunity\CfHelper\Logger
  */
-class CloudFoundryHandler extends SyslogHandler
+class CloudFoundryHandler extends ErrorLogHandler implements HandlerInterface
 {
-    public function __construct($level = Logger::DEBUG, $bubble = true, $logopts = LOG_PID)
+    public function  __construct($messageType = self::OPERATING_SYSTEM, $level = Logger::DEBUG, $bubble = true, $expandNewlines = false)
     {
-        parent::__construct('Cloud Foundry', LOG_USER, $level, $bubble, LOG_PID | LOG_PERROR);
+        parent::__construct($messageType, $level, $bubble, $expandNewlines);
     }
 
     public function setLevel($level)

@@ -14,7 +14,7 @@
 namespace CfCommunity\CfHelper\Logger;
 
 
-use Monolog\Handler\SyslogHandler;
+use Monolog\Handler\HandlerInterface;
 use Monolog\Logger;
 use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
@@ -25,7 +25,7 @@ use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 class CloudFoundryLogger extends Logger
 {
     /**
-     * @var CloudFoundryHandler
+     * @var HandlerInterface
      */
     private $cloudFoundryHandler;
 
@@ -48,10 +48,10 @@ class CloudFoundryLogger extends Logger
     }
 
     /**
-     * @param CloudFoundryHandler $cloudFoundryHandler
+     * @param HandlerInterface $cloudFoundryHandler
      * @Required
      */
-    public function setCloudFoundryHandler(CloudFoundryHandler $cloudFoundryHandler)
+    public function setCloudFoundryHandler(HandlerInterface $cloudFoundryHandler)
     {
         $this->cloudFoundryHandler = $cloudFoundryHandler;
     }
