@@ -25,7 +25,7 @@ class DatabaseConnector extends AbstractConnector
     const TABLE_NAME = 'rest_proxify';
     const SENTENCE_PDO = "%s:host=%s;%sdbname=%s";
     const DBTYPE_PG = "(postgres|pgsql)";
-    const DBTYPE_MYSQL = "(maria|my)";
+    const DBTYPE_MYSQL = "(mariadb|mysql)";
     const DBTYPE_ORACLE = "(oracle|oci)";
     const DBTYPE_SQLITE = "sqlite";
     /**
