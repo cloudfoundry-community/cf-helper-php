@@ -89,22 +89,6 @@ You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConn
  - sentencePdo (**only** for database connector)
  - database (**only** for database connector)
 
-You also must follow a convention when naming your service to make `cf-helper-php` do auto-detect, it must contains one those value in service name:
-
- - For database connector:
-  - `my` (for mysql)
-  - `db`
-  - `database`
-  - `oracle`
-  - `oci`
-  - `postgres`
-  - `pgsql`
-  - `maria`
- - For redis connector:
-  - `redis`
- - For mongodb connector
-  - `mongodb`
-
 ### Example usage of pdo connector
 
 ```php
