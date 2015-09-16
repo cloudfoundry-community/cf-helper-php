@@ -155,13 +155,13 @@ class Service
     }
 
     /**
-     * @param $tag
+     * @param string $tagToFind
      * @return bool
      */
-    public function haveTag($tag)
+    public function haveTag($tagToFind)
     {
-        foreach ($this->tags as $keyObject => $value) {
-            if (preg_match('#^' . $tag . '$#i', $keyObject)) {
+        foreach ($this->tags as $tag) {
+            if (preg_match('#^' . $tagToFind . '$#i', $tag)) {
                 return true;
             }
         }
