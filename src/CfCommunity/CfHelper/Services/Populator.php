@@ -30,6 +30,12 @@ abstract class  Populator
     public abstract function getService($name);
 
     /**
+     * @param $tags
+     * @return null|Service[]
+     */
+    public abstract function getServicesByTags($tags);
+
+    /**
      *
      */
     public abstract function load();

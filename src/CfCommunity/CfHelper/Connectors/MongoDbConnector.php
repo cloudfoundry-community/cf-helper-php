@@ -38,11 +38,15 @@ class MongoDbConnector extends AbstractConnector
 
     public function load()
     {
-        $redisService = $this->serviceManager->getService('.*mongo.*');
-        if ($redisService === null) {
+        $nameOrTagsToFind = '.*mongo.*';
+        $mongodbService = $this->serviceManager->getService($nameOrTagsToFind);
+        if ($mongodbService === null) {
+            $mongodbService = $this->serviceManager->getServiceByTags($nameOrTagsToFind);
+        }
+        if ($mongodbService === null) {
             return;
         }
-        $this->credentials = $this->parseFromService($redisService);
+        $this->credentials = $this->parseFromService($mongodbService);
         $this->loadMongoDbConnection();
     }
 

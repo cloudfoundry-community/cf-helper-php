@@ -60,6 +60,28 @@ class ServiceManager
     }
 
     /**
+     * @param $tags
+     * @return Service[]
+     */
+    public function getServicesByTags($tags)
+    {
+        return $this->populator->getServicesByTags($tags);
+    }
+
+    /**
+     * @param $tags
+     * @return null|Service
+     */
+    public function getServiceByTags($tags)
+    {
+        $services = $this->populator->getServicesByTags($tags);
+        if (empty($services)) {
+            return null;
+        }
+        return $services[0];
+    }
+
+    /**
      * @return Service[]
      */
     public function getAllServices()

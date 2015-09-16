@@ -10,8 +10,8 @@
  */
 namespace CfCommunity\CfHelper\Services;
 
-use CfCommunity\CfHelper\Application\ApplicationInfo;
 use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
+use CfCommunity\CfHelper\Application\ApplicationInfo;
 
 /**
  * Class PopulatorCloudFoundry
@@ -24,13 +24,18 @@ class PopulatorCloudFoundry extends Populator
      */
     private $vcapServices;
     /**
-     * @var array(string => Service)
+     * @var Service[]
      */
     private $services = array();
     /**
      * @var ApplicationInfo
      */
     private $applicationInfo;
+
+    /**
+     * @var bool
+     */
+    private $fullyLoaded = false;
 
     /**
      *
@@ -83,10 +88,11 @@ class PopulatorCloudFoundry extends Populator
      */
     private function makeService($service)
     {
-        $serviceObject = new Service($service['name'], $service['credentials'], $service['label']);
+        $serviceObject = new Service($service['name'], $service['credentials'], $service['label'], $service['tags']);
         unset($service['name']);
         unset($service['credentials']);
         unset($service['label']);
+        unset($service['tags']);
         $serviceObject->addDatas($service);
         $this->services[$serviceObject->getName()] = $serviceObject;
         return $serviceObject;
@@ -109,6 +115,45 @@ class PopulatorCloudFoundry extends Populator
             }
         }
         return null;
+    }
+
+    /**
+     * @param $tags
+     * @return Service[]
+     */
+    public function getServicesByTags($tags)
+    {
+        if (!is_array($tags)) {
+            $tags = array($tags);
+        }
+        $services = array();
+        $this->getAllServices();
+        foreach ($this->services as $service) {
+            if ($service->haveOneOfTags($tags)) {
+                $services[] = $service;
+            }
+        }
+        return $services;
+    }
+
+    /**
+     * @return Service[]
+     */
+    public function getAllServices()
+    {
+        if ($this->fullyLoaded) {
+            return $this->services;
+        }
+        foreach ($this->vcapServices as $serviceFirstName => $services) {
+            foreach ($services as $service) {
+                if (empty($service['name'])) {
+                    continue;
+                }
+                $this->makeService($service);
+            }
+        }
+        $this->fullyLoaded = true;
+        return $this->services;
     }
 
     /**
@@ -146,22 +191,6 @@ class PopulatorCloudFoundry extends Populator
                 $this->applicationInfo->$key = $value;
             }
         }
-    }
-
-    /**
-     * @return Service[]
-     */
-    public function getAllServices()
-    {
-        foreach ($this->vcapServices as $serviceFirstName => $services) {
-            foreach ($services as $service) {
-                if (empty($service['name'])) {
-                    continue;
-                }
-                $this->makeService($service);
-            }
-        }
-        return $this->services;
     }
 
     /**

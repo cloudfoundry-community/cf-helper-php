@@ -53,7 +53,11 @@ class DatabaseConnector extends AbstractConnector
             self::DBTYPE_PG,
             self::DBTYPE_SQLITE
         ]);
-        $dbService = $this->serviceManager->getService('.*(db|database|(' . $dbToFind . ')).*');
+        $nameOrTagsToFind = '.*(db|database|(' . $dbToFind . ')).*';
+        $dbService = $this->serviceManager->getService($nameOrTagsToFind);
+        if ($dbService === null) {
+            $dbService = $this->serviceManager->getServiceByTags($nameOrTagsToFind);
+        }
         if ($dbService === null) {
             return;
         }

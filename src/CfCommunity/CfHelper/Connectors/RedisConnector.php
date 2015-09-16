@@ -35,7 +35,11 @@ class RedisConnector extends AbstractConnector
 
     public function load()
     {
-        $redisService = $this->serviceManager->getService('.*redis.*');
+        $nameOrTagsToFind = '.*redis.*';
+        $redisService = $this->serviceManager->getService($nameOrTagsToFind);
+        if ($redisService === null) {
+            $redisService = $this->serviceManager->getServiceByTags($nameOrTagsToFind);
+        }
         if ($redisService === null) {
             return;
         }

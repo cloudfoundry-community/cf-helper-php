@@ -31,15 +31,22 @@ class Service
     private $values;
 
     /**
+     * @var array(key => value)
+     */
+    private $tags;
+
+    /**
      * @param $name
      * @param array $values
      * @param null $label
+     * @param array $tags
      */
-    function __construct($name, array $values, $label = null)
+    function __construct($name, array $values, $label = null, $tags = array())
     {
         $this->name = $name;
         $this->values = $values;
         $this->label = $label;
+        $this->tags = $tags;
     }
 
     /**
@@ -112,6 +119,53 @@ class Service
             }
         }
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @param array $tags
+     * @return bool
+     */
+    public function haveOneOfTags($tags)
+    {
+        if (!is_array($tags)) {
+            $tags = array($tags);
+        }
+        foreach ($tags as $tag) {
+            if ($this->haveTag($tag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param $tag
+     * @return bool
+     */
+    public function haveTag($tag)
+    {
+        foreach ($this->tags as $keyObject => $value) {
+            if (preg_match('#^' . $tag . '$#i', $keyObject)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
