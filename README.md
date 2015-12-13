@@ -8,7 +8,7 @@ You will never have to do this again:
 $vcap_services = json_decode($_ENV['VCAP_SERVICES']);
 ```
 
-This helper was tested against [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) and [dmikusa-pivotal/cf-php-build-pack](https://github.com/dmikusa-pivotal/cf-php-build-pack) php buildpack.
+This helper works with official [php buildpack](https://github.com/cloudfoundry/php-buildpack).
 
 Usage
 -----
