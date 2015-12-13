@@ -121,9 +121,7 @@ $logger = CfHelper::getInstance()->getLogger();
 
 Set php configuration
 -------------------------
-With [pivotal-cf-experimental/cf-buildpack-php](https://github.com/pivotal-cf-experimental/cf-buildpack-php) you can set a `.user.ini` file to set your php configuration but it's not very flexible, you can also use directly `ini_set()` but you will have to do all by your own.
-
-So with `cf-helper-php` we help you to set your php configuration, add in a new file in root project directory called `cfhelper.json` a `php-ini` variable and set your php configuration, example:
+With `cf-helper-php` we help you to set your php configuration, add in a new file in root project directory called `cfhelper.json` a `php-ini` variable and set your php configuration, example:
 ```json
 "php-ini": {
     "display_errors": "On",
