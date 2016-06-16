@@ -14,7 +14,7 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"cloudfoundry-community/cf-helper-php": "1.4.*"
+"cloudfoundry-community/cf-helper-php": "1.6.*"
 ```
 And include it the page you want to load:
 ```php
