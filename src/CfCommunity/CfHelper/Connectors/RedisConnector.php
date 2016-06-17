@@ -35,6 +35,12 @@ class RedisConnector extends AbstractConnector
 
     public function load()
     {
+        $this->loadCredentials();
+        $this->loadRedisConnection();
+    }
+
+    public function loadCredentials()
+    {
         $nameOrTagsToFind = '.*redis.*';
         $redisService = $this->serviceManager->getService($nameOrTagsToFind);
         if ($redisService === null) {
@@ -44,7 +50,6 @@ class RedisConnector extends AbstractConnector
             return;
         }
         $this->credentials = $this->parseFromService($redisService);
-        $this->loadRedisConnection();
     }
 
     private function loadRedisConnection()

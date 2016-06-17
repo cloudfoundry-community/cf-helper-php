@@ -47,6 +47,12 @@ class DatabaseConnector extends AbstractConnector
 
     public function load()
     {
+        $this->loadCredentials();
+        $this->loadDatabaseFromDbParsed();
+    }
+
+    public function loadCredentials()
+    {
         $dbToFind = implode('|', [
             self::DBTYPE_ORACLE,
             self::DBTYPE_MYSQL,
@@ -62,7 +68,6 @@ class DatabaseConnector extends AbstractConnector
             return;
         }
         $this->credentials = $this->parseDbFromService($dbService);
-        $this->loadDatabaseFromDbParsed();
     }
 
     public function parseDbFromService(Service $service)
