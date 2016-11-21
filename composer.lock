@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fc877e96ce8464c6a5f1d260b5981d94",
-    "content-hash": "78d3d0e5e143480a95a4c75500dffd05",
+    "hash": "23de5afb5bc6eb4995f8a9a1a22b9cd9",
+    "content-hash": "a72997a0ef947d3c989a84ca0827c829",
     "packages": [
         {
             "name": "arhframe/util",
