@@ -67,8 +67,26 @@ class CloudFoundrySimulator
     public static function loadVarEnv(array $envVars)
     {
         foreach ($envVars as $key => $value) {
-            $_ENV[$key] = $value;
+            CloudFoundrySimulator::setVar($key, $value);
         }
+    }
+    
+    /**
+    * @param string $name
+    * @param string $value
+    */
+    public static function setVar($name, $value)
+    {
+        // Apache environment variable exists, overwrite it
+        if (function_exists('apache_getenv') && function_exists('apache_setenv') && apache_getenv($name)) {
+            apache_setenv($name, $value);
+        }
+
+        if (function_exists('putenv')) {
+            putenv("$name=$value");
+        }
+        
+        $_ENV[$name] = $value;
     }
 
     /**
