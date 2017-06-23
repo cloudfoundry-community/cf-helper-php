@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "sphring/sphring": "0.12.5",
+    "sphring/sphring": "0.13.0",
     "filp/whoops": "~2.1",
     "symfony/yaml": "~2.5",
     "monolog/monolog": "~1.13"
