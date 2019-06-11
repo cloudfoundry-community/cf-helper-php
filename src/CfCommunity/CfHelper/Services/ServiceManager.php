@@ -11,8 +11,6 @@
 
 namespace CfCommunity\CfHelper\Services;
 
-use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
-
 /**
  * Class ServiceManager
  * @package CfCommunity\CfHelper\Services
@@ -25,11 +23,15 @@ class ServiceManager
     private $populator;
 
     /**
-     *
+     * ServiceManager constructor.
+     * @param Populator $populator
      */
-    public function __construct()
+    public function __construct($populator = null)
     {
-        $this->populator = new PopulatorCloudFoundry();
+        if (empty($populator)) {
+            $populator = new PopulatorCloudFoundry();
+        }
+        $this->setPopulator($populator);
     }
 
     /**
@@ -41,12 +43,12 @@ class ServiceManager
     }
 
     /**
-     * @Required
      * @param Populator $populator
      */
     public function setPopulator(Populator $populator)
     {
         $this->populator = $populator;
+        $this->populator->load();
     }
 
 

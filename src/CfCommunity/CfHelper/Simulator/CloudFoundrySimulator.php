@@ -9,6 +9,7 @@
  * Author: Arthur Halet
  * Date: 19/08/2014
  */
+
 namespace CfCommunity\CfHelper\Simulator;
 /**
  * Class CloudFoundrySimulator
@@ -19,7 +20,7 @@ class CloudFoundrySimulator
     /**
      *
      */
-    const KEY_SIMULATE_SERVICE = 'serviceSimulate';
+    const KEY_SIMULATE_SERVICE = 'services';
     /**
      *
      */
@@ -30,24 +31,24 @@ class CloudFoundrySimulator
     const KEY_APPLICATION = 'applications';
 
     /**
-     * @param $manifestYml
+     * @param $servicesJson
      */
-    public static function simulate($manifestYml)
+    public static function simulate($servicesJson)
     {
-        CloudFoundrySimulator::loadEnv($manifestYml);
-        CloudFoundrySimulator::loadService($manifestYml);
+        CloudFoundrySimulator::loadEnv($servicesJson);
+        CloudFoundrySimulator::loadService($servicesJson);
     }
 
     /**
-     * @param $manifestYml
+     * @param $servicesJson
      */
-    public static function loadEnv($manifestYml)
+    public static function loadEnv($servicesJson)
     {
-        if (!is_file($manifestYml)) {
+        if (!is_file($servicesJson)) {
             return;
         }
-
-        $manifestUnparse = \Symfony\Component\Yaml\Yaml::parse($manifestYml);
+        $fileContent = file_get_contents($servicesJson);
+        $manifestUnparse = json_decode($fileContent, true);;
         $applications = $manifestUnparse[self::KEY_APPLICATION];
         if (empty($applications)) {
             return;
@@ -70,34 +71,30 @@ class CloudFoundrySimulator
             CloudFoundrySimulator::setVar($key, $value);
         }
     }
-    
+
     /**
-    * @param string $name
-    * @param string $value
-    */
+     * @param string $name
+     * @param string $value
+     */
     public static function setVar($name, $value)
     {
         // Apache environment variable exists, overwrite it
         if (function_exists('apache_getenv') && function_exists('apache_setenv') && apache_getenv($name)) {
             apache_setenv($name, $value);
         }
-
-        if (function_exists('putenv')) {
-            putenv("$name=$value");
-        }
-        
-        $_ENV[$name] = $value;
+        putenv("$name=$value");
     }
 
     /**
-     * @param $manifestYml
+     * @param $servicesJson
      */
-    public static function loadService($manifestYml)
+    public static function loadService($servicesJson)
     {
-        if (!is_file($manifestYml)) {
+        if (!is_file($servicesJson)) {
             return;
         }
-        $manifestUnparse = \Symfony\Component\Yaml\Yaml::parse($manifestYml);
+        $fileContent = file_get_contents($servicesJson);
+        $manifestUnparse = json_decode($fileContent, true);
         $services = $manifestUnparse[self::KEY_SIMULATE_SERVICE];
         if (empty($services)) {
             return;

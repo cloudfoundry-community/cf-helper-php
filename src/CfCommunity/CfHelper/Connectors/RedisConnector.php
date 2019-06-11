@@ -15,7 +15,7 @@ namespace CfCommunity\CfHelper\Connectors;
 
 use Predis\Client;
 
-class RedisConnector extends AbstractConnector
+class RedisConnector extends AbstractUriConnector implements Connector
 {
     /**
      * @var Client;
@@ -66,5 +66,10 @@ class RedisConnector extends AbstractConnector
             'port' => $this->credentials['port'],
             'password' => $this->credentials['pass'],
         ]);
+    }
+
+    function getName()
+    {
+        return "redis";
     }
 }

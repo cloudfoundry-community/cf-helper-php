@@ -17,7 +17,7 @@ namespace CfCommunity\CfHelper\Connectors;
  * Class MongoDbConnector
  * @package CfCommunity\CfHelper\Connectors
  */
-class MongoDbConnector extends AbstractConnector
+class MongoDbConnector extends AbstractUriConnector implements Connector
 {
 
     /**
@@ -64,5 +64,10 @@ class MongoDbConnector extends AbstractConnector
             return null;
         }
         $this->connection = new \MongoClient($this->credentials['url']);
+    }
+
+    function getName()
+    {
+        return "mongoDb";
     }
 }

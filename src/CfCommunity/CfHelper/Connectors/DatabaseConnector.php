@@ -19,7 +19,7 @@ use CfCommunity\CfHelper\Services\Service;
  * Class DatabaseConnector
  * @package CfCommunity\CfHelper\Connectors
  */
-class DatabaseConnector extends AbstractConnector
+class DatabaseConnector extends AbstractUriConnector implements Connector
 {
 
     const TABLE_NAME = 'rest_proxify';
@@ -132,5 +132,10 @@ class DatabaseConnector extends AbstractConnector
             $this->connection = new \PDO($this->credentials);
         }
         $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    }
+
+    function getName()
+    {
+        return "database";
     }
 }

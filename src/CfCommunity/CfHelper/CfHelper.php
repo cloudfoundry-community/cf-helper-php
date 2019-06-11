@@ -11,40 +11,69 @@
 
 namespace CfCommunity\CfHelper;
 
-use Arthurh\Sphring\Runner\SphringRunner;
-use Arthurh\Sphring\Sphring;
 use CfCommunity\CfHelper\Application\ApplicationInfo;
-use CfCommunity\CfHelper\Configuration\PhpIniConfigurator;
-use CfCommunity\CfHelper\Connectors\AbstractConnector;
+use CfCommunity\CfHelper\Connectors\Connector;
 use CfCommunity\CfHelper\Connectors\DatabaseConnector;
 use CfCommunity\CfHelper\Connectors\MongoDbConnector;
 use CfCommunity\CfHelper\Connectors\RedisConnector;
-use CfCommunity\CfHelper\Logger\CloudFoundryLogger;
+use CfCommunity\CfHelper\Exception\ConnectorNotFoundException;
+use CfCommunity\CfHelper\Exception\ConnectorNotUniqException;
+use CfCommunity\CfHelper\Services\Populator;
 use CfCommunity\CfHelper\Services\ServiceManager;
 use CfCommunity\CfHelper\Simulator\CloudFoundrySimulator;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class CfHelper
  * @package CfCommunity\CfHelper
  */
-class CfHelper extends SphringRunner
+class CfHelper
 {
     const DETECT_CLOUDFOUNDRY = 'VCAP_APPLICATION';
 
+    private $serviceManager;
 
-    public function __construct()
+    /**
+     * @var Connector[]
+     */
+    private $connectors;
+
+    /**
+     * @var
+     */
+    private $connectorsState = array();
+
+    public function __construct(ServiceManager $serviceManager = null)
     {
-        parent::__construct();
-        $this->getSphring()->setFilename(__DIR__ . '/sphring/main.yml');
+        if (empty($serviceManager)) {
+            $serviceManager = new ServiceManager();
+        }
+        $this->addConnector(new DatabaseConnector());
+        $this->addConnector(new MongoDbConnector());
+        $this->addConnector(new RedisConnector());
+        $this->serviceManager = $serviceManager;
+    }
+
+    public function addConnector(Connector $connector)
+    {
+        if ($this->hasConnector($connector)) {
+            throw new ConnectorNotUniqException($connector);
+        }
+        $this->connectors[] = $connector;
+        $connector->setServiceManager($this->serviceManager);
     }
 
     /**
-     * @return PhpIniConfigurator
+     * @param Connector $connector
+     * @return bool
      */
-    public function getPhpIniConfigurator()
+    public function hasConnector(Connector $connector)
     {
-        return $this->getSphring()->getBean('cfhelper.phpIniConfigurator');
+        foreach ($this->connectors as $conn) {
+            if ($conn->getName() == $connector->getName()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -52,68 +81,78 @@ class CfHelper extends SphringRunner
      */
     public function getServiceManager()
     {
-        return $this->getSphring()->getBean('cfhelper.serviceManager');
+        return $this->serviceManager;
     }
 
+    /**
+     * @return Populator
+     */
+    public function getPopulator()
+    {
+        return $this->serviceManager->getPopulator();
+    }
 
     /**
      * @return ApplicationInfo
      */
     public function getApplicationInfo()
     {
-        return $this->getSphring()->getBean('cfhelper.applicationInfo');
+        return $this->serviceManager->getPopulator()->getApplicationInfo();
     }
 
     /**
      * @param string $manifestYml
      */
-    public function simulateCloudFoundry($manifestYml = "manifest.yml")
+    public function simulateCloudFoundry($manifestYml = "services.json")
     {
         CloudFoundrySimulator::simulate($manifestYml);
     }
 
     public function isInCloudFoundry()
     {
-        return !empty($_ENV[self::DETECT_CLOUDFOUNDRY]);
+        return !empty(getenv(self::DETECT_CLOUDFOUNDRY));
     }
 
     /**
-     * @return CloudFoundryLogger
-     */
-    public function getLogger()
-    {
-        return $this->getSphring()->getBean('cfhelper.logger.logger');
-    }
-
-    /**
-     * @return AbstractConnector[]
+     * @return Connector[]
      */
     public function getConnectors()
     {
-        return $this->getSphring()->getBean('cfhelper.connectors');
+        return $this->connectors;
+    }
+
+    public function __call($methodName, $arguments)
+    {
+        if (substr($methodName, 0, 3) !== 'get') {
+            throw new \Exception('Method ' . $methodName . ' not exists');
+        }
+        if (substr($methodName, -strlen("Connector")) !== "Connector") {
+            throw new \Exception('Method ' . $methodName . ' not exists');
+        }
+        $connectorName = substr($methodName, 3);
+        $connectorName = substr_replace($connectorName, "Connector", 0);
+
+        $connector = $this->getConnector($connectorName);
+        if (isset($this->connectorsState[$connector->getName()])) {
+            return $connector;
+        }
+        $this->connectorsState[$connector->getName()] = true;
+        $connector->load();
+        return $connector;
     }
 
     /**
-     * @return DatabaseConnector
+     * @param $name
+     * @return Connector
+     * @throws ConnectorNotFoundException
      */
-    public function getDatabaseConnector()
+    public function getConnector($name)
     {
-        return $this->getSphring()->getBean('cfhelper.connector.database');
-    }
-
-    /**
-     * @return RedisConnector
-     */
-    public function getRedisConnector()
-    {
-        return $this->getSphring()->getBean('cfhelper.connector.redis');
-    }
-
-    /**
-     * @return MongoDbConnector
-     */
-    public function getMongoDbConnector()
-    {
-        return $this->getSphring()->getBean('cfhelper.connector.mongo');
+        foreach ($this->connectors as $conn) {
+            if ($conn->getName() == $name) {
+                return $conn;
+            }
+        }
+        throw new ConnectorNotFoundException($name);
     }
 }
