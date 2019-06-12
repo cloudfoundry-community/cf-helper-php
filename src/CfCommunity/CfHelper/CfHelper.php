@@ -35,7 +35,7 @@ class CfHelper
     /**
      * @var Connector[]
      */
-    private $connectors;
+    private $connectors = array();
 
     /**
      * @var
@@ -47,10 +47,10 @@ class CfHelper
         if (empty($serviceManager)) {
             $serviceManager = new ServiceManager();
         }
+        $this->serviceManager = $serviceManager;
         $this->addConnector(new DatabaseConnector());
         $this->addConnector(new MongoDbConnector());
         $this->addConnector(new RedisConnector());
-        $this->serviceManager = $serviceManager;
     }
 
     public function addConnector(Connector $connector)

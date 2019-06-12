@@ -17,6 +17,7 @@
   ],
   "require-dev": {
     "predis/predis": "~1.0",
+    "mongodb/mongodb": "~1.5",
     "phpunit/phpunit": "6.5.*"
   },
   "autoload": {
@@ -25,6 +26,7 @@
     }
   },
   "suggest": {
-    "predis/predis": "Let's you have a redis connection for RedisConnector"
+    "predis/predis": "Let's you have a redis connection for RedisConnector",
+    "mongodb/mongodb": "Use mongodb in for auto connection"
   }
 }

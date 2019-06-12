@@ -21,12 +21,12 @@ class MongoDbConnector extends AbstractUriConnector implements Connector
 {
 
     /**
-     * @var \MongoClient;
+     * @var \MongoDB\Client;
      */
     private $connection;
 
     /**
-     * @return \MongoClient
+     * @return \MongoDB\Client
      */
     public function getConnection()
     {
@@ -60,10 +60,10 @@ class MongoDbConnector extends AbstractUriConnector implements Connector
         if (empty($this->credentials)) {
             return null;
         }
-        if (!class_exists("\\MongoClient")) {
+        if (!class_exists("MongoDB\\Client")) {
             return null;
         }
-        $this->connection = new \MongoClient($this->credentials['url']);
+        $this->connection = new MongoDB\Client($this->credentials['url']);
     }
 
     function getName()
