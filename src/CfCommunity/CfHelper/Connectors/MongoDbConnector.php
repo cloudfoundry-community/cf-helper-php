@@ -17,16 +17,16 @@ namespace CfCommunity\CfHelper\Connectors;
  * Class MongoDbConnector
  * @package CfCommunity\CfHelper\Connectors
  */
-class MongoDbConnector extends AbstractConnector
+class MongoDbConnector extends AbstractUriConnector implements Connector
 {
 
     /**
-     * @var \MongoClient;
+     * @var \MongoDB\Client;
      */
     private $connection;
 
     /**
-     * @return \MongoClient
+     * @return \MongoDB\Client
      */
     public function getConnection()
     {
@@ -60,9 +60,14 @@ class MongoDbConnector extends AbstractConnector
         if (empty($this->credentials)) {
             return null;
         }
-        if (!class_exists("\\MongoClient")) {
+        if (!class_exists("MongoDB\\Client")) {
             return null;
         }
-        $this->connection = new \MongoClient($this->credentials['url']);
+        $this->connection = new MongoDB\Client($this->credentials['url']);
+    }
+
+    function getName()
+    {
+        return "mongoDb";
     }
 }

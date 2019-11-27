@@ -16,9 +16,8 @@ namespace CfCommunity\CfHelper\Connectors;
 
 use CfCommunity\CfHelper\Services\Service;
 use CfCommunity\CfHelper\Services\ServiceManager;
-use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 
-abstract class AbstractConnector
+abstract class AbstractUriConnector
 {
     /**
      * @var ServiceManager
@@ -29,10 +28,6 @@ abstract class AbstractConnector
      */
     protected $credentials;
 
-    /**
-     * @return mixed
-     */
-    abstract public function load();
 
     /**
      * @return ServiceManager
@@ -44,7 +39,6 @@ abstract class AbstractConnector
 
     /**
      * @param ServiceManager $serviceManager
-     * @Required
      */
     public function setServiceManager(ServiceManager $serviceManager)
     {
@@ -81,8 +75,6 @@ abstract class AbstractConnector
         $toReturn['path'] = str_replace('/', '', $parsedUrl['path']);
         return $toReturn;
     }
-
-    abstract public function getConnection();
 
     /**
      * @return array

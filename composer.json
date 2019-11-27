@@ -15,14 +15,10 @@
       "email": "arthur.halet@orange.com"
     }
   ],
-  "require": {
-    "sphring/sphring": "0.13.0",
-    "filp/whoops": "~2.1",
-    "symfony/yaml": "~2.5",
-    "monolog/monolog": "~1.13"
-  },
   "require-dev": {
-    "predis/predis": "~1.0"
+    "predis/predis": "~1.0",
+    "mongodb/mongodb": "~1.5",
+    "phpunit/phpunit": "6.5.*"
   },
   "autoload": {
     "psr-4": {
@@ -30,6 +26,7 @@
     }
   },
   "suggest": {
-    "predis/predis": "Let's you have a redis conection for RedisConnector"
+    "predis/predis": "Let's you have a redis connection for RedisConnector",
+    "mongodb/mongodb": "Use mongodb in for auto connection"
   }
 }

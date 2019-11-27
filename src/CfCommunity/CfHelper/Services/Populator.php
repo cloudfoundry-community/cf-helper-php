@@ -8,41 +8,42 @@
  * Author: Arthur Halet
  * Date: 01-07-2014
  */
+
 namespace CfCommunity\CfHelper\Services;
+
+use CfCommunity\CfHelper\Application\ApplicationInfo;
+
 /**
  * Class Populator
  * @package CfCommunity\CfHelper\Services
  */
-abstract class  Populator
+interface Populator
 {
 
     /**
-     *
-     */
-    function __construct()
-    {
-    }
-
-    /**
      * @param $name
-     * @return Service
+     * @return null|Service
      */
-    public abstract function getService($name);
+    function getService($name);
 
     /**
      * @param $tags
      * @return null|Service[]
      */
-    public abstract function getServicesByTags($tags);
+    function getServicesByTags($tags);
 
     /**
      *
      */
-    public abstract function load();
+    function load();
 
     /**
      * @return Service[]
      */
-    public abstract function getAllServices();
+    function getAllServices();
 
+    /**
+     * @return ApplicationInfo
+     */
+    function getApplicationInfo();
 }

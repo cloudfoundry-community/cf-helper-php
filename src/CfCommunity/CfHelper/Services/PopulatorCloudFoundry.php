@@ -8,17 +8,19 @@
  * Author: Arthur Halet
  * Date: 01-07-2014
  */
+
 namespace CfCommunity\CfHelper\Services;
 
-use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 use CfCommunity\CfHelper\Application\ApplicationInfo;
 
 /**
  * Class PopulatorCloudFoundry
  * @package CfCommunity\CfHelper\Services
  */
-class PopulatorCloudFoundry extends Populator
+class PopulatorCloudFoundry implements Populator
 {
+    const VCAP_APPLICATION = 'VCAP_APPLICATION';
+    const VCAP_SERVICES = 'VCAP_SERVICES';
     /**
      * @var array
      */
@@ -27,10 +29,6 @@ class PopulatorCloudFoundry extends Populator
      * @var Service[]
      */
     private $services = array();
-    /**
-     * @var ApplicationInfo
-     */
-    private $applicationInfo;
 
     /**
      * @var bool
@@ -38,11 +36,30 @@ class PopulatorCloudFoundry extends Populator
     private $fullyLoaded = false;
 
     /**
-     *
+     * @var string
      */
-    function __construct()
+    private $servicesJson;
+
+    /**
+     * @var string
+     */
+    private $appJson;
+
+    /**
+     * PopulatorCloudFoundry constructor.
+     * @param $servicesJson
+     * @param $appJson
+     */
+    function __construct($servicesJson = null, $appJson = null)
     {
-        parent::__construct();
+        if (empty($servicesJson)) {
+            $servicesJson = getenv(self::VCAP_SERVICES);
+        }
+        if (empty($appJson)) {
+            $appJson = getenv(self::VCAP_APPLICATION);
+        }
+        $this->servicesJson = $servicesJson;
+        $this->appJson = $appJson;
     }
 
     /**
@@ -156,41 +173,25 @@ class PopulatorCloudFoundry extends Populator
         return $this->services;
     }
 
+
     /**
      * @return ApplicationInfo
      */
     public function getApplicationInfo()
     {
-        return $this->applicationInfo;
-    }
-
-    /**
-     * @Required
-     * @param ApplicationInfo $applicationInfo
-     *
-     */
-    public function setApplicationInfo(ApplicationInfo $applicationInfo)
-    {
-        $this->applicationInfo = $applicationInfo;
-        $this->populateApplicationInfo();
-    }
-
-    /**
-     *
-     */
-    public function populateApplicationInfo()
-    {
-        $vcapApplication = json_decode($_ENV['VCAP_APPLICATION'], true);
+        $vcapApplication = json_decode($this->appJson, true);
         if (empty($vcapApplication)) {
-            return;
+            return null;
         }
+        $applicationInfo = new ApplicationInfo();
         foreach ($vcapApplication as $key => $value) {
             if (is_array($value)) {
-                $this->applicationInfo->$key = (object)$value;
+                $applicationInfo->$key = (object)$value;
             } else {
-                $this->applicationInfo->$key = $value;
+                $applicationInfo->$key = $value;
             }
         }
+        return $applicationInfo;
     }
 
     /**
@@ -198,9 +199,9 @@ class PopulatorCloudFoundry extends Populator
      */
     public function load()
     {
-        if (!isset($_ENV['VCAP_SERVICES']) || $this->vcapServices !== null) {
+        if (!isset($this->servicesJson) || $this->vcapServices !== null) {
             return;
         }
-        $this->vcapServices = json_decode($_ENV['VCAP_SERVICES'], true);
+        $this->vcapServices = json_decode($this->servicesJson, true);
     }
 }
