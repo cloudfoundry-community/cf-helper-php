@@ -14,14 +14,14 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"cloudfoundry-community/cf-helper-php": "1.6.*"
+"cloudfoundry-community/cf-helper-php": "^2.0"
 ```
 And include it the page you want to load:
 ```php
 <?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
-$cfHelper = CfHelper::getInstance();
+$cfHelper = new CfHelper();
 ```
 You can access the service binding or application information through the service manager class
 
@@ -40,7 +40,7 @@ For example you have a service called `database` with this credentials:
 You can simply get your service like this:
 ```php
 <?php
-$serviceManager = CfHelper::getInstance()->getServiceManager();
+$serviceManager = $cfHelper->getServiceManager();
 $dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
 $host = $dbService->getValue('host');//or regular expression example: getValue('ho[A-Za-z]+')
@@ -62,7 +62,7 @@ $name = $applicationInfo->getName();
 $uris = $applicationInfo->getUris();
 
 //for other information contains in VCAP_APPLICATION like limits get with that
-$limits = $applicationInfo->limits
+$limits = $applicationInfo->limits;
 ```
 
 ### Get a connector
