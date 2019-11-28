@@ -39,7 +39,6 @@ For example you have a service called `database` with this credentials:
 ```
 You can simply get your service like this:
 ```php
-<?php
 $serviceManager = $cfHelper->getServiceManager();
 $dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
@@ -55,7 +54,6 @@ $services = $serviceManager->getAllServices();
 
 Simply like this:
 ```php
-<?php
 $applicationInfo = $cfHelper->getApplicationInfo();
 $version = $applicationInfo->getVersion();
 $name = $applicationInfo->getName();
@@ -73,13 +71,12 @@ It give you the possibility to have a PDO object when database is provided in se
 
 To get this access just follow this this:
 ```php
-<?php
-$pdo = CfHelper::getInstance()->getDatabaseConnector()->getConnection();
-$redis = CfHelper::getInstance()->getRedisConnector()->getConnection();
-$mongodb = CfHelper::getInstance()->getMongoDbConnector()->getConnection();
+$pdo = $cfHelper->getDatabaseConnector()->getConnection();
+$redis = $cfHelper->getRedisConnector()->getConnection();
+$mongodb = $cfHelper->getMongoDbConnector()->getConnection();
 ```
 
-You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConnector>Connector()->getCredentials()` it will give you an array with:
+You can directly get credentials by doing `$cfHelper->get<TypeConnector>Connector()->getCredentials()` it will give you an array with:
 
  - host
  - port
@@ -95,7 +92,7 @@ You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConn
 <?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
-$cfHelper = CfHelper::getInstance();
+$cfHelper = new CfHelper();
 try {
     //if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
     if ($cfHelper->isInCloudFoundry()) {
@@ -103,20 +100,11 @@ try {
     } else {
         $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
     }
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 //...
-```
-
-### Get the logger
-
-You have also access to a logger set for Cloud Foundry environment, access to it like this:
-
-```php
-<?php
-$logger = CfHelper::getInstance()->getLogger();
 ```
 
 Set php configuration
