@@ -4,7 +4,7 @@ cf-helper-php
 An helper for php application inside cloudfoundry to access application and services bindings information without parsing the json-formatted `VCAP_APPLICATION` or `VCAP_SERVICES` env vars. This is similar to the https://www.npmjs.org/package/cfenv node package.
 You will never have to do this again:
 ```php
-<?php
+// Don't do this
 $vcap_services = json_decode($_ENV['VCAP_SERVICES']);
 ```
 
@@ -18,7 +18,6 @@ This php application is published as a composer package. Fetch it by adding the 
 ```
 And include it the page you want to load:
 ```php
-<?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
 $cfHelper = new CfHelper();
@@ -89,21 +88,17 @@ You can directly get credentials by doing `$cfHelper->get<TypeConnector>Connecto
 ### Example usage of pdo connector
 
 ```php
-<?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
 $cfHelper = new CfHelper();
-try {
-    //if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
-    if ($cfHelper->isInCloudFoundry()) {
-        $db = $cfHelper->getDatabaseConnector()->getConnection();
-    } else {
-        $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
-    }
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
+
+//if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
+if ($cfHelper->isInCloudFoundry()) {
+    $db = $cfHelper->getDatabaseConnector()->getConnection();
+} else {
+    $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
 }
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //...
 ```
 
@@ -149,7 +144,6 @@ serviceSimulate:
 
 To run CloudFoundry simulation simply do:
 ```php
-<?php
 $cfHelper->simulateCloudFoundry(); //it use manifest.yml which is in the same folder where this script is called
 //to set another manifest.yml:
 $cfHelper->simulateCloudFoundry("your_manifest.yml);
