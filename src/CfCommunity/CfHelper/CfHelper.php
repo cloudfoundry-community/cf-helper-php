@@ -25,6 +25,10 @@ use CfCommunity\CfHelper\Simulator\CloudFoundrySimulator;
 /**
  * Class CfHelper
  * @package CfCommunity\CfHelper
+ *
+ * @method DatabaseConnector getDatabaseConnector()
+ * @method MongoDbConnector getRedisConnector()
+ * @method RedisConnector getMongoDbConnector()
  */
 class CfHelper
 {

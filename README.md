@@ -4,7 +4,7 @@ cf-helper-php
 An helper for php application inside cloudfoundry to access application and services bindings information without parsing the json-formatted `VCAP_APPLICATION` or `VCAP_SERVICES` env vars. This is similar to the https://www.npmjs.org/package/cfenv node package.
 You will never have to do this again:
 ```php
-<?php
+// Don't do this
 $vcap_services = json_decode($_ENV['VCAP_SERVICES']);
 ```
 
@@ -14,14 +14,13 @@ Usage
 -----
 This php application is published as a composer package. Fetch it by adding the following to your composer.json:
 ```json
-"cloudfoundry-community/cf-helper-php": "1.6.*"
+"cloudfoundry-community/cf-helper-php": "^2.0"
 ```
 And include it the page you want to load:
 ```php
-<?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
-$cfHelper = CfHelper::getInstance();
+$cfHelper = new CfHelper();
 ```
 You can access the service binding or application information through the service manager class
 
@@ -39,8 +38,7 @@ For example you have a service called `database` with this credentials:
 ```
 You can simply get your service like this:
 ```php
-<?php
-$serviceManager = CfHelper::getInstance()->getServiceManager();
+$serviceManager = $cfHelper->getServiceManager();
 $dbService = $serviceManager->getService('database'); //or regular expression example: getService('.*database.*')
 //and for example get the host credential
 $host = $dbService->getValue('host');//or regular expression example: getValue('ho[A-Za-z]+')
@@ -55,14 +53,13 @@ $services = $serviceManager->getAllServices();
 
 Simply like this:
 ```php
-<?php
 $applicationInfo = $cfHelper->getApplicationInfo();
 $version = $applicationInfo->getVersion();
 $name = $applicationInfo->getName();
 $uris = $applicationInfo->getUris();
 
 //for other information contains in VCAP_APPLICATION like limits get with that
-$limits = $applicationInfo->limits
+$limits = $applicationInfo->limits;
 ```
 
 ### Get a connector
@@ -73,13 +70,12 @@ It give you the possibility to have a PDO object when database is provided in se
 
 To get this access just follow this this:
 ```php
-<?php
-$pdo = CfHelper::getInstance()->getDatabaseConnector()->getConnection();
-$redis = CfHelper::getInstance()->getRedisConnector()->getConnection();
-$mongodb = CfHelper::getInstance()->getMongoDbConnector()->getConnection();
+$pdo = $cfHelper->getDatabaseConnector()->getConnection();
+$redis = $cfHelper->getRedisConnector()->getConnection();
+$mongodb = $cfHelper->getMongoDbConnector()->getConnection();
 ```
 
-You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConnector>Connector()->getCredentials()` it will give you an array with:
+You can directly get credentials by doing `$cfHelper->get<TypeConnector>Connector()->getCredentials()` it will give you an array with:
 
  - host
  - port
@@ -92,31 +88,18 @@ You can directly get credentials by doing `CfHelper::getInstance()->get<TypeConn
 ### Example usage of pdo connector
 
 ```php
-<?php
 require_once __DIR__ .'/vendor/autoload.php';
 use CfCommunity\CfHelper\CfHelper;
-$cfHelper = CfHelper::getInstance();
-try {
-    //if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
-    if ($cfHelper->isInCloudFoundry()) {
-        $db = $cfHelper->getDatabaseConnector()->getConnection();
-    } else {
-        $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
-    }
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
+$cfHelper = new CfHelper();
+
+//if we are in cloud foundry we use the connection given by cf-helper-php otherwise we use our database in local
+if ($cfHelper->isInCloudFoundry()) {
+    $db = $cfHelper->getDatabaseConnector()->getConnection();
+} else {
+    $db = new PDO('mysql:host=localhost;dbname=mydbinlocal;charset=utf8', 'root', '');
 }
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //...
-```
-
-### Get the logger
-
-You have also access to a logger set for Cloud Foundry environment, access to it like this:
-
-```php
-<?php
-$logger = CfHelper::getInstance()->getLogger();
 ```
 
 Set php configuration
@@ -161,7 +144,6 @@ serviceSimulate:
 
 To run CloudFoundry simulation simply do:
 ```php
-<?php
 $cfHelper->simulateCloudFoundry(); //it use manifest.yml which is in the same folder where this script is called
 //to set another manifest.yml:
 $cfHelper->simulateCloudFoundry("your_manifest.yml);
