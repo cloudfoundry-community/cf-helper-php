@@ -36,15 +36,15 @@ class Service
     private $tags;
 
     /**
-     * @param $name
-     * @param array $values
-     * @param null $label
-     * @param array $tags
+     * @param string $name
+     * @param array|null $values
+     * @param string|null $label
+     * @param array|null $tags
      */
-    function __construct($name, array $values, $label = null, $tags = array())
+    function __construct($name, array $values = null, $label = null, $tags = array())
     {
         $this->name = $name;
-        $this->values = $values;
+        $this->values = $values ? $values : array();
         $this->label = $label;
         $this->tags = $tags;
     }
@@ -76,7 +76,7 @@ class Service
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -84,7 +84,7 @@ class Service
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
