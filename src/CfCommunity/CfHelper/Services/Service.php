@@ -16,7 +16,6 @@ namespace CfCommunity\CfHelper\Services;
  */
 class Service
 {
-
     /**
      * @var string
      */
@@ -41,7 +40,7 @@ class Service
      * @param string|null $label
      * @param array|null $tags
      */
-    function __construct($name, array $values = null, $label = null, $tags = array())
+    public function __construct($name, array $values = null, $label = null, $tags = array())
     {
         $this->name = $name;
         $this->values = $values ? $values : array();
@@ -178,5 +177,4 @@ class Service
         $this->values[$key] = $value;
         return $this;
     }
-
 }

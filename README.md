@@ -125,28 +125,78 @@ With `cf-helper-php` you can say that you are in development and app will do the
 
 Simulate CloudFoundry environment
 ---------------------------------
-You can half simulate a CloudFoudry environment by using a `manifest.yml`, your environment variable from manifest will be set in `$_ENV`.
-You can also add simulate service by adding a key called `serviceSimulate` in your `manifest.yml`, example:
+You can simulate a CloudFoudry environment by using a `vcap.json`, your environment variable from manifest will be set in `$_ENV`. This JSON format will mimic what you would find in VCAP_APPLICATION and VCAP_SERVICES, with the addition of an 'ENV' parameter to add environment variables.
 
-```yml
-#manifest.yml
----
-#manifest
-applications:
-  - name: test
-    memory: 1G
-    env:
-      MYAPP_APP_DIR: /home/vcap/app
-      MYAPP_LOGS_DIR: /logs_dir
-serviceSimulate:
-  DATABASE: {"host": "localhost", "username": "jojo", "password": "toto", "port": "3306"} # a service database will be accessible, prefer writing with {'key": 'value'} to simplify your cups command
+```json
+{
+  "VCAP_SERVICES": {
+    "user-provided": [
+      {
+        "label": "user-provided",
+        "name": "managed-ELK-logging",
+        "tags": [],
+        "instance_name": "managed-ELK-logging",
+        "binding_name": null,
+        "credentials": {},
+        "syslog_drain_url": "syslog://tcplogs-epg.localdomain:5000",
+        "volume_mounts": []
+      }
+    ],
+    "p.redis": [
+      {
+        "label": "p.redis",
+        "provider": null,
+        "plan": "cache-large",
+        "name": "redis-sessions",
+        "tags": [
+          "redis",
+          "pivotal",
+          "on-demand"
+        ],
+        "instance_name": "redis-sessions",
+        "binding_name": null,
+        "credentials": {
+          "host": "q-s0.redis-instance.svc-dmd.service-instance-8e8fb07f-9c0b-4313-8748-0cf61f0ee989.bosh",
+          "password": "redispassword",
+          "port": 6379
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ]
+  },
+  "VCAP_APPLICATION": {
+    "cf_api": "https://api.sys.pcf.localdomain",
+    "limits": {
+      "fds": 16384
+    },
+    "application_name": "api-active",
+    "application_uris": [
+      "api-qa.apps.pcf.localdomain"
+    ],
+    "name": "api-active",
+    "space_name": "epg02-qa",
+    "space_id": "d3325332-9abb-4136-9232-f7e244f51817",
+    "organization_id": "4fe703b7-199c-4a63-aaa9-6261de724641",
+    "organization_name": "epg02-local-team",
+    "uris": [
+      "api-qa.apps.pcf.localdomain"
+    ],
+    "users": null,
+    "application_id": "8bee55d9-5f5c-4d70-88a7-f1c159d9652e"
+  },
+  "ENV": {
+    "APPLICATION_VERSION": "1.0.0"
+  }
+}
+
 ```
 
 To run CloudFoundry simulation simply do:
 ```php
-$cfHelper->simulateCloudFoundry(); //it use manifest.yml which is in the same folder where this script is called
-//to set another manifest.yml:
-$cfHelper->simulateCloudFoundry("your_manifest.yml);
+$cfHelper->simulateCloudFoundry(); //it use vcap.json which is in the same folder where this script is called
+//to set another vcap.json:
+$cfHelper->simulateCloudFoundry("your_vcap.json");
 ```
 
 

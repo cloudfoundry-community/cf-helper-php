@@ -10,7 +10,6 @@
  * Date: 18/03/2015
  */
 
-
 namespace CfCommunity\CfHelper\Connectors;
 
 use Predis\Client;
@@ -68,7 +67,7 @@ class RedisConnector extends AbstractUriConnector implements Connector
         ]);
     }
 
-    function getName()
+    public function getName()
     {
         return "redis";
     }

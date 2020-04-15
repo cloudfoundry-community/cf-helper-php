@@ -25,6 +25,11 @@
       "CfCommunity\\CfHelper\\": "src/CfCommunity/CfHelper/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\CfCommunity\\CfHelper\\": "tests/CfCommunity/CfHelper"
+    }
+  },
   "suggest": {
     "predis/predis": "Let's you have a redis connection for RedisConnector",
     "mongodb/mongodb": "Use mongodb in for auto connection"

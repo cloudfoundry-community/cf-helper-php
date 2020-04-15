@@ -51,7 +51,6 @@ class ServiceManager
         $this->populator->load();
     }
 
-
     /**
      * @param $name
      * @return null|Service

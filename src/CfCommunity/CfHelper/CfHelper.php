@@ -32,7 +32,7 @@ use CfCommunity\CfHelper\Simulator\CloudFoundrySimulator;
  */
 class CfHelper
 {
-    const DETECT_CLOUDFOUNDRY = 'VCAP_APPLICATION';
+    private const DETECT_CLOUDFOUNDRY = 'VCAP_APPLICATION';
 
     private $serviceManager;
 
@@ -46,6 +46,11 @@ class CfHelper
      */
     private $connectorsState = array();
 
+    /**
+     * CfHelper constructor.
+     * @param ServiceManager|null $serviceManager
+     * @throws ConnectorNotUniqException
+     */
     public function __construct(ServiceManager $serviceManager = null)
     {
         if (empty($serviceManager)) {
@@ -57,6 +62,10 @@ class CfHelper
         $this->addConnector(new RedisConnector());
     }
 
+    /**
+     * @param Connector $connector
+     * @throws ConnectorNotUniqException
+     */
     public function addConnector(Connector $connector)
     {
         if ($this->hasConnector($connector)) {
@@ -105,11 +114,11 @@ class CfHelper
     }
 
     /**
-     * @param string $manifestYml
+     * @param string $jsonFile
      */
-    public function simulateCloudFoundry($manifestYml = "services.json")
+    public function simulateCloudFoundry($jsonFile = 'vcap.json')
     {
-        CloudFoundrySimulator::simulate($manifestYml);
+        CloudFoundrySimulator::simulate($jsonFile);
     }
 
     public function isInCloudFoundry()

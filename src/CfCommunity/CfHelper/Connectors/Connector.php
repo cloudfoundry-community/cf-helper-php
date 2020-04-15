@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright (C) 2018 Arthur Halet
  *
@@ -20,25 +19,25 @@ interface Connector
     /**
      *
      */
-    function load();
+    public function load();
 
     /**
      * @return mixed
      */
-    function getCredentials();
+    public function getCredentials();
 
     /**
      * @return mixed
      */
-    function getConnection();
+    public function getConnection();
 
     /**
      * @return string
      */
-    function getName();
+    public function getName();
 
     /**
      * @param ServiceManager $serviceManager
      */
-    function setServiceManager(ServiceManager $serviceManager);
+    public function setServiceManager(ServiceManager $serviceManager);
 }

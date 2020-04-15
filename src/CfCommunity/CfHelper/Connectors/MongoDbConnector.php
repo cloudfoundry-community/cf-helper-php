@@ -10,7 +10,6 @@
  * Date: 18/03/2015
  */
 
-
 namespace CfCommunity\CfHelper\Connectors;
 
 /**
@@ -19,7 +18,6 @@ namespace CfCommunity\CfHelper\Connectors;
  */
 class MongoDbConnector extends AbstractUriConnector implements Connector
 {
-
     /**
      * @var \MongoDB\Client;
      */
@@ -66,7 +64,7 @@ class MongoDbConnector extends AbstractUriConnector implements Connector
         $this->connection = new MongoDB\Client($this->credentials['url']);
     }
 
-    function getName()
+    public function getName()
     {
         return "mongoDb";
     }

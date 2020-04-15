@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Copyright (C) 2018 Arthur Halet
  *
@@ -13,7 +11,6 @@
  */
 
 namespace CfCommunity\CfHelper\Exception;
-
 
 use CfCommunity\CfHelper\Connectors\Connector;
 

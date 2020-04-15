@@ -19,31 +19,30 @@ use CfCommunity\CfHelper\Application\ApplicationInfo;
  */
 interface Populator
 {
-
     /**
      * @param $name
      * @return null|Service
      */
-    function getService($name);
+    public function getService($name);
 
     /**
      * @param $tags
      * @return null|Service[]
      */
-    function getServicesByTags($tags);
+    public function getServicesByTags($tags);
 
     /**
      *
      */
-    function load();
+    public function load();
 
     /**
      * @return Service[]
      */
-    function getAllServices();
+    public function getAllServices();
 
     /**
      * @return ApplicationInfo
      */
-    function getApplicationInfo();
+    public function getApplicationInfo();
 }

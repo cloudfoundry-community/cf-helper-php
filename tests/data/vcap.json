@@ -1,0 +1,287 @@
+{
+  "VCAP_SERVICES": {
+    "user-provided": [
+      {
+        "label": "user-provided",
+        "name": "managed-ELK-logging",
+        "tags": [],
+        "instance_name": "managed-ELK-logging",
+        "binding_name": null,
+        "credentials": {},
+        "syslog_drain_url": "syslog://tcplogs-epg.localdomain:5000",
+        "volume_mounts": []
+      }
+    ],
+    "p.redis": [
+      {
+        "label": "p.redis",
+        "provider": null,
+        "plan": "cache-large",
+        "name": "redis-sessions",
+        "tags": [
+          "redis",
+          "pivotal",
+          "on-demand"
+        ],
+        "instance_name": "redis-sessions",
+        "binding_name": null,
+        "credentials": {
+          "host": "q-s0.redis-instance.svc-dmd.service-instance-8e8fb07f-9c0b-4313-8748-0cf61f0ee989.bosh",
+          "password": "password",
+          "port": 6379
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ],
+    "p-rabbitmq": [
+      {
+        "label": "p-rabbitmq",
+        "provider": null,
+        "plan": "standard",
+        "name": "rabbitmq",
+        "tags": [
+          "rabbitmq",
+          "rabbit",
+          "messaging",
+          "message-queue",
+          "amqp",
+          "mqtt",
+          "stomp"
+        ],
+        "instance_name": "rabbitmq",
+        "binding_name": null,
+        "credentials": {
+          "dashboard_url": "https://pivotal-rabbitmq.sys.pcf.localdomain/#/login/username/password",
+          "hostname": "10.212.51.23",
+          "hostnames": [
+            "10.212.51.23",
+            "10.212.51.32"
+          ],
+          "http_api_uri": "https://username:password@pivotal-rabbitmq.sys.pcf.localdomain/api/",
+          "http_api_uris": [
+            "https://username:password@pivotal-rabbitmq.sys.pcf.localdomain/api/"
+          ],
+          "password": "password",
+          "protocols": {
+            "amqp+ssl": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 5671,
+              "ssl": true,
+              "uri": "amqps://username:password@10.212.51.23:5671/02867b2e-e57e-4259-b941-22af75f67246",
+              "uris": [
+                "amqps://username:password@10.212.51.23:5671/02867b2e-e57e-4259-b941-22af75f67246",
+                "amqps://username:password@10.212.51.32:5671/02867b2e-e57e-4259-b941-22af75f67246"
+              ],
+              "username": "username",
+              "vhost": "02867b2e-e57e-4259-b941-22af75f67246"
+            },
+            "management": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "path": "/api/",
+              "port": 15672,
+              "ssl": false,
+              "uri": "http://username:password@10.212.51.23:15672/api/",
+              "uris": [
+                "http://username:password@10.212.51.23:15672/api/",
+                "http://username:password@10.212.51.32:15672/api/"
+              ],
+              "username": "username"
+            },
+            "management+ssl": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "path": "/api/",
+              "port": 15672,
+              "ssl": false,
+              "uri": "http://username:password@10.212.51.23:15672/api/",
+              "uris": [
+                "http://username:password@10.212.51.23:15672/api/",
+                "http://username:password@10.212.51.32:15672/api/"
+              ],
+              "username": "username"
+            },
+            "mqtt": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 1883,
+              "ssl": false,
+              "uri": "mqtt://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.23:1883",
+              "uris": [
+                "mqtt://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.23:1883",
+                "mqtt://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.32:1883"
+              ],
+              "username": "02867b2e-e57e-4259-b941-22af75f67246:username"
+            },
+            "mqtt+ssl": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 8883,
+              "ssl": true,
+              "uri": "mqtt+ssl://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.23:8883",
+              "uris": [
+                "mqtt+ssl://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.23:8883",
+                "mqtt+ssl://02867b2e-e57e-4259-b941-22af75f67246%3Ausername:password@10.212.51.32:8883"
+              ],
+              "username": "02867b2e-e57e-4259-b941-22af75f67246:username"
+            },
+            "stomp": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 61613,
+              "ssl": false,
+              "uri": "stomp://username:password@10.212.51.23:61613",
+              "uris": [
+                "stomp://username:password@10.212.51.23:61613",
+                "stomp://username:password@10.212.51.32:61613"
+              ],
+              "username": "username",
+              "vhost": "02867b2e-e57e-4259-b941-22af75f67246"
+            },
+            "stomp+ssl": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 61614,
+              "ssl": true,
+              "uri": "stomp+ssl://username:password@10.212.51.23:61614",
+              "uris": [
+                "stomp+ssl://username:password@10.212.51.23:61614",
+                "stomp+ssl://username:password@10.212.51.32:61614"
+              ],
+              "username": "username",
+              "vhost": "02867b2e-e57e-4259-b941-22af75f67246"
+            },
+            "ws": {
+              "host": "10.212.51.23",
+              "hosts": [
+                "10.212.51.23",
+                "10.212.51.32"
+              ],
+              "password": "password",
+              "port": 15674,
+              "ssl": false,
+              "uri": "http/web-stomp://username:password@10.212.51.23:15674/02867b2e-e57e-4259-b941-22af75f67246",
+              "uris": [
+                "http/web-stomp://username:password@10.212.51.23:15674/02867b2e-e57e-4259-b941-22af75f67246",
+                "http/web-stomp://username:password@10.212.51.32:15674/02867b2e-e57e-4259-b941-22af75f67246"
+              ],
+              "username": "username",
+              "vhost": "02867b2e-e57e-4259-b941-22af75f67246"
+            }
+          },
+          "ssl": true,
+          "uri": "amqps://username:password@10.212.51.23/02867b2e-e57e-4259-b941-22af75f67246",
+          "uris": [
+            "amqps://username:password@10.212.51.23/02867b2e-e57e-4259-b941-22af75f67246",
+            "amqps://username:password@10.212.51.32/02867b2e-e57e-4259-b941-22af75f67246"
+          ],
+          "username": "username",
+          "vhost": "02867b2e-e57e-4259-b941-22af75f67246"
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ],
+    "app-autoscaler": [
+      {
+        "label": "app-autoscaler",
+        "provider": null,
+        "plan": "standard",
+        "name": "autoscaler",
+        "tags": [
+          "cfapi",
+          "runtime",
+          "autoscaling"
+        ],
+        "instance_name": "autoscaler",
+        "binding_name": null,
+        "credentials": {},
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ],
+    "hashicorp-vault": [
+      {
+        "label": "hashicorp-vault",
+        "provider": null,
+        "plan": "shared",
+        "name": "vault",
+        "tags": [
+          ""
+        ],
+        "instance_name": "vault",
+        "binding_name": null,
+        "credentials": {
+          "address": "https://vault.localdomain:8243/",
+          "auth": {
+            "accessor": "accessor",
+            "token": "token"
+          },
+          "backends": {
+            "generic": "cf/d041c229-4125-47b1-bacf-bc064716620a/secret",
+            "transit": "cf/d041c229-4125-47b1-bacf-bc064716620a/transit"
+          },
+          "backends_shared": {
+            "organization": "cf/4fe703b7-199c-4a63-aaa9-6261de724641/secret",
+            "space": "cf/d3325332-9abb-4136-9232-f7e244f51817/secret"
+          }
+        },
+        "syslog_drain_url": null,
+        "volume_mounts": []
+      }
+    ]
+  },
+  "VCAP_APPLICATION": {
+    "cf_api": "https://api.sys.pcf.localdomain",
+    "limits": {
+      "fds": 16384
+    },
+    "application_name": "api-active",
+    "application_uris": [
+      "api-qa.apps.pcf.localdomain"
+    ],
+    "name": "api-active",
+    "space_name": "epg02-qa",
+    "space_id": "d3325332-9abb-4136-9232-f7e244f51817",
+    "organization_id": "4fe703b7-199c-4a63-aaa9-6261de724641",
+    "organization_name": "epg02-local-team",
+    "uris": [
+      "api-qa.apps.pcf.localdomain"
+    ],
+    "users": null,
+    "application_id": "8bee55d9-5f5c-4d70-88a7-f1c159d9652e"
+  },
+  "ENV": {
+    "SOME_VAR": "abc"
+  }
+}
