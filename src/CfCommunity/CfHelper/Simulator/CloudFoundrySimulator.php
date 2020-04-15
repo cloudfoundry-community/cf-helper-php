@@ -20,15 +20,15 @@ class CloudFoundrySimulator
     /**
      *
      */
-    const KEY_SIMULATE_SERVICE = 'services';
+    const VCAP_SERVICE = 'VCAP_SERVICES';
     /**
      *
      */
-    const KEY_SERVICE = 'VCAP_SERVICES';
+    const VCAP_APPLICATION = 'VCAP_APPLICATION';
     /**
      *
      */
-    const KEY_APPLICATION = 'applications';
+    const ENV = 'ENV';
 
     /**
      * @param $servicesJson
@@ -36,6 +36,7 @@ class CloudFoundrySimulator
     public static function simulate($servicesJson)
     {
         CloudFoundrySimulator::loadEnv($servicesJson);
+        CloudFoundrySimulator::loadApplication($servicesJson);
         CloudFoundrySimulator::loadService($servicesJson);
     }
 
@@ -48,18 +49,29 @@ class CloudFoundrySimulator
             return;
         }
         $fileContent = file_get_contents($servicesJson);
-        $manifestUnparse = json_decode($fileContent, true);;
-        $applications = $manifestUnparse[self::KEY_APPLICATION];
-        if (empty($applications)) {
+        $json = json_decode($fileContent, true);
+        if (!isset($json[self::ENV])) {
+            return;
+        }
+        CloudFoundrySimulator::loadVarEnv($json[self::ENV]);
+    }
+
+    /**
+     * @param $servicesJson
+     */
+    public static function loadApplication($servicesJson)
+    {
+        if (!is_file($servicesJson)) {
+            return;
+        }
+        $fileContent = file_get_contents($servicesJson);
+        $json = json_decode($fileContent, true);
+
+        if (!isset($json[self::VCAP_APPLICATION])) {
             return;
         }
 
-        foreach ($applications as $application) {
-            if (empty($application['env'])) {
-                continue;
-            }
-            CloudFoundrySimulator::loadVarEnv($application['env']);
-        }
+        CloudFoundrySimulator::loadVarEnv(array(self::VCAP_APPLICATION => json_encode($json[self::VCAP_APPLICATION])));
     }
 
     /**
@@ -94,20 +106,11 @@ class CloudFoundrySimulator
             return;
         }
         $fileContent = file_get_contents($servicesJson);
-        $manifestUnparse = json_decode($fileContent, true);
-        $services = $manifestUnparse[self::KEY_SIMULATE_SERVICE];
-        if (empty($services)) {
+        $json = json_decode($fileContent, true);
+
+        if (!isset($json[self::VCAP_SERVICE])) {
             return;
         }
-        foreach ($services as $serviceName => $serviceCredentials) {
-            $service = array(
-                "name" => $serviceName,
-                "label" => "user-provided",
-                "tags" => array(),
-                "credentials" => $serviceCredentials
-            );
-            $serviceUserProvided = array(array("user-provided" => $service));
-            CloudFoundrySimulator::loadVarEnv(array(self::KEY_SERVICE => json_encode($serviceUserProvided)));
-        }
+        CloudFoundrySimulator::loadVarEnv(array(self::VCAP_SERVICE => json_encode($json[self::VCAP_SERVICE])));
     }
-} 
+}

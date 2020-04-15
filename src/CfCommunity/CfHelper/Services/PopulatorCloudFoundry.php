@@ -19,8 +19,8 @@ use CfCommunity\CfHelper\Application\ApplicationInfo;
  */
 class PopulatorCloudFoundry implements Populator
 {
-    const VCAP_APPLICATION = 'VCAP_APPLICATION';
-    const VCAP_SERVICES = 'VCAP_SERVICES';
+    private const VCAP_APPLICATION = 'VCAP_APPLICATION';
+    private const VCAP_SERVICES = 'VCAP_SERVICES';
     /**
      * @var array
      */
@@ -50,7 +50,7 @@ class PopulatorCloudFoundry implements Populator
      * @param $servicesJson
      * @param $appJson
      */
-    function __construct($servicesJson = null, $appJson = null)
+    public function __construct($servicesJson = null, $appJson = null)
     {
         if (empty($servicesJson)) {
             $servicesJson = getenv(self::VCAP_SERVICES);
@@ -75,11 +75,11 @@ class PopulatorCloudFoundry implements Populator
             return $this->services[$name];
         }
         $service = $this->getServiceFirst($name);
-        if (!empty($service)) {
+        if ($service !== null) {
             return $service;
         }
         $service = $this->getServiceInside($name);
-        if (!empty($service)) {
+        if ($service !== null) {
             return $service;
         }
         return null;

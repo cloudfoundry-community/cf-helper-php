@@ -21,18 +21,16 @@ use CfCommunity\CfHelper\Services\Service;
  */
 class DatabaseConnector extends AbstractUriConnector implements Connector
 {
-
-    const TABLE_NAME = 'rest_proxify';
-    const SENTENCE_PDO = "%s:host=%s;%sdbname=%s";
-    const DBTYPE_PG = "(postgres|pgsql)";
-    const DBTYPE_MYSQL = "(mariadb|mysql)";
-    const DBTYPE_ORACLE = "(oracle|oci)";
-    const DBTYPE_SQLITE = "sqlite";
+    private const TABLE_NAME = 'rest_proxify';
+    private const SENTENCE_PDO = '%s:host=%s;%sdbname=%s';
+    private const DBTYPE_PG = '(postgres|pgsql)';
+    private const DBTYPE_MYSQL = '(mariadb|mysql)';
+    private const DBTYPE_ORACLE = '(oracle|oci)';
+    private const DBTYPE_SQLITE = 'sqlite';
     /**
      * @var \PDO;
      */
     private $connection;
-
 
     /**
      * @return \PDO
@@ -134,7 +132,7 @@ class DatabaseConnector extends AbstractUriConnector implements Connector
         $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
-    function getName()
+    public function getName()
     {
         return "database";
     }

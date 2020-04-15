@@ -10,9 +10,7 @@
  * Date: 18/03/2015
  */
 
-
 namespace CfCommunity\CfHelper\Connectors;
-
 
 use CfCommunity\CfHelper\Services\Service;
 use CfCommunity\CfHelper\Services\ServiceManager;
@@ -83,6 +81,4 @@ abstract class AbstractUriConnector
     {
         return $this->credentials;
     }
-
-
 }
